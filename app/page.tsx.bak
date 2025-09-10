@@ -1,0 +1,295 @@
+﻿import MainLayout from '@/components/layout/main-layout'
+import Link from 'next/link'
+import Hero from '@/components/sections/Hero'
+import BrandSlider from '@/components/sections/BrandSlider'
+import Services from '@/components/sections/Services'
+import About from '@/components/sections/About'
+import Case from '@/components/sections/Case'
+import Team from '@/components/sections/Team'
+
+export default function Home() {
+  return (
+    <MainLayout>
+      {/* Hero Section */}
+      <Hero />
+
+      {/* About + Slider + Services + Case + Team */}
+      <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" className="scrollspy-example bg-body-tertiary rounded-2" tabIndex={0}>
+        <About />
+        <BrandSlider />
+        <Services />
+        <Case />
+        <Team />
+      </div>
+
+      {/* Testimonials Section */}
+        <div className="testimonial5-section-area sp1" id="testimonial">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-7 m-auto">
+                <div className="testimonial5-header text-center heading10">
+                  <h5> <img src="/assets/img/icons/logo-icons6.svg" alt="" />Testimonials</h5>
+                  <h2 className="text-anime-style-3">Client Success Stories: Hear What Our Clients Have To Say</h2>
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-duration="1000">
+                <div className="testimonial-boxarea">
+                  <div className="content-area">
+                    <div className="quote-img">
+                      <img src="/assets/img/icons/quito5.svg" alt="" />
+                    </div>
+                    <p>"Working with this team has been a game-changer for our business. Their expertise and dedication have helped us achieve unprecedented growth in our online presence. I highly recommend to any business looking to boost their online visibility and drive meaningful results."</p>
+                    <div className="space32"></div>
+                    <div className="author-area">
+                      <div className="img1">
+                        <img src="/assets/img/all-images/testimonial-img1.png" alt="" />
+                      </div>
+                      <div className="content">
+                        <h4>Leslie Alexander</h4>
+                        <p>CEO, Business Administ</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-duration="1200">
+                <div className="testimonial-boxarea">
+                  <div className="content-area">
+                    <div className="quote-img">
+                      <img src="/assets/img/icons/quito5.svg" alt="" />
+                    </div>
+                    <p>"Working with this team has been a game-changer for our business. Their expertise and dedication have helped us achieve unprecedented growth in our online presence. I highly recommend to any business looking to boost their online visibility and drive meaningful results."</p>
+                    <div className="space32"></div>
+                    <div className="author-area">
+                      <div className="img1">
+                        <img src="/assets/img/all-images/testimonial-img2.png" alt="" />
+                      </div>
+                      <div className="content">
+                        <h4>Leslie Alexander</h4>
+                        <p>CEO, Business Administ</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-duration="1400">
+                <div className="testimonial-boxarea">
+                  <div className="content-area">
+                    <div className="quote-img">
+                      <img src="/assets/img/icons/quito5.svg" alt="" />
+                    </div>
+                    <p>"Working with this team has been a game-changer for our business. Their expertise and dedication have helped us achieve unprecedented growth in our online presence. I highly recommend to any business looking to boost their online visibility and drive meaningful results."</p>
+                    <div className="space32"></div>
+                    <div className="author-area">
+                      <div className="img1">
+                        <img src="/assets/img/all-images/testimonial-img4.png" alt="" />
+                      </div>
+                      <div className="content">
+                        <h4>Leslie Alexander</h4>
+                        <p>CEO, Business Administ</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Blog Section */}
+        <div className="blog5-section-area sp1" id="blog">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-7 m-auto">
+                <div className="blog5-header text-center heading10">
+                  <h5> <img src="/assets/img/icons/logo-icons6.svg" alt="" />Blog</h5>
+                  <h2 className="text-anime-style-3">Explore Our Blog</h2>
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-duration="1000">
+                <div className="blog-author-boxarea">
+                  <div className="img1 image-anime">
+                    <img src="/assets/img/all-images/blog-img15.png" alt="" />
+                  </div>
+                  <div className="content-area">
+                    <div className="tags">
+                      <a href="#blog">SEO</a>
+                      <p>January 15, 2024</p>
+                    </div>
+                    <a href="#blog">10 SEO Trends That Will Dominate 2024</a>
+                    <p>Discover the latest SEO trends and strategies that will help your website rank higher in search results this year.</p>
+                    <a href="#blog" className="readmore">Read More <i className="fa-solid fa-arrow-right"></i></a>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-duration="1200">
+                <div className="blog-author-boxarea">
+                  <div className="img1 image-anime">
+                    <img src="/assets/img/all-images/blog-img16.png" alt="" />
+                  </div>
+                  <div className="content-area">
+                    <div className="tags">
+                      <a href="#blog">Marketing</a>
+                      <p>January 12, 2024</p>
+                    </div>
+                    <a href="#blog">The Complete Guide to Social Media Marketing</a>
+                    <p>Learn how to create effective social media campaigns that drive engagement and convert followers into customers.</p>
+                    <a href="#blog" className="readmore">Read More <i className="fa-solid fa-arrow-right"></i></a>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-duration="1400">
+                <div className="blog-author-boxarea">
+                  <div className="img1 image-anime">
+                    <img src="/assets/img/all-images/blog-img17.png" alt="" />
+                  </div>
+                  <div className="content-area">
+                    <div className="tags">
+                      <a href="#blog">Content</a>
+                      <p>January 10, 2024</p>
+                    </div>
+                    <a href="#blog">How to Create a Winning Content Marketing Strategy</a>
+                    <p>Build a content marketing strategy that attracts your target audience and drives measurable business results.</p>
+                    <a href="#blog" className="readmore">Read More <i className="fa-solid fa-arrow-right"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Contact Section */}
+        <div className="contact5-section-area sp1" id="contact">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-12 m-auto">
+                <div className="contact-header-area text-center heading10">
+                  <h5><img src="/assets/img/icons/logo-icons6.svg" alt="" />Contact</h5>
+                  <h2 className="text-anime-style-3">Contact Our SEO Expert</h2>
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-lg-5" data-aos="zoom-in" data-aos-duration="1200">
+                <div className="contact-info-area">
+                  <h3>Contact Info</h3>
+                  <p>We're here to help! If you have any questions or would like to discuss how our SEO and digital marketing services can benefit your business,</p>
+                  <div className="space32"></div>
+                  <div className="contact-auhtor-box">
+                    <div className="icons">
+                      <img src="/assets/img/icons/location2.svg" alt="" />
+                    </div>
+                    <div className="content">
+                      <h4>Our Location</h4>
+                      <a href="#">8708 Technology Forest Pl Suite <br className="d-lg-block d-none" /> 125 -G, The Woodlands, TX 773</a>
+                    </div>
+                  </div>
+                  <div className="space40"></div>
+                  <div className="contact-auhtor-box">
+                    <div className="icons">
+                      <img src="/assets/img/icons/phone2.svg" alt="" />
+                    </div>
+                    <div className="content">
+                      <h4>Phone Number</h4>
+                      <a href="tel:123-456-7890">123-456-7890 <br />
+                        123-456-7890</a>
+                    </div>
+                  </div>
+                  <div className="space40"></div>
+                  <div className="contact-auhtor-box">
+                    <div className="icons">
+                      <img src="/assets/img/icons/email2.svg" alt="" />
+                    </div>
+                    <div className="content">
+                      <h4>Email Address</h4>
+                      <a href="mailto:infoseoc@gmail.com">infoseoc@gmail.com <br />
+                      infoseoc@gmail.com</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-7" data-aos="zoom-in" data-aos-duration="1200">
+                <div className="contact-boxarea">
+                  <h3>Get In Touch</h3>
+                  <p>We're here to help! If you have any questions or would like to discuss <br className="d-lg-block d-none" /> how our SEO and digital marketing services can benefit your business,</p>
+                  <form action="https://api.web3forms.com/submit" method="POST">
+                    <div className="row">
+                      <div className="col-lg-6">
+                        <div className="input-area">
+                          <input type="text" placeholder="First Name" required />
+                        </div>
+                      </div>
+                      <div className="col-lg-6">
+                        <div className="input-area">
+                          <input type="text" placeholder="Last Name" required />
+                        </div>
+                      </div>
+                      <div className="col-lg-6">
+                        <div className="input-area">
+                          <input type="email" placeholder="Email Address" required />
+                        </div>
+                      </div>
+                      <div className="col-lg-6">
+                        <div className="input-area">
+                          <input type="number" placeholder="Phone Number" required />
+                        </div>
+                      </div>
+                      <div className="col-lg-12">
+                        <div className="input-area">
+                          <select name="country" id="country" className="country-area nice-select6">
+                            <option value="1" data-display="Service Type">Service Type</option>
+                            <option value="seo">SEO Services</option>
+                            <option value="social">Social Media Marketing</option>
+                            <option value="web">Web Development</option>
+                            <option value="content">Content Marketing</option>
+                            <option value="ppc">PPC Advertising</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div className="col-lg-12">
+                        <div className="input-area">
+                          <textarea placeholder="Your Message" required></textarea>
+                        </div>
+                      </div>
+                      <div className="col-lg-12">
+                        <div className="input-area">
+                          <button className="header-btn11">Get Started Now <span><i className="fa-solid fa-arrow-right"></i></span></button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="cta5-section-area sp1" style={{backgroundImage: 'url(/assets/img/bg/header-bg5.png)', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}}>
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-6 m-auto">
+                <div className="cta-header-area text-center heading10">
+                  <h2 className="text-anime-style-3">Ready To Take Your Digital Marketing To the Next Level?</h2>
+                  <p data-aos="fade-up" data-aos-duration="1000">
+                    Effective SEO strategies not only elevate a website's visibility but also drive <br className="d-lg-block d-none" /> targeted traffic, enhance user experience,
+                  </p>
+                  <div className="btn-area1" data-aos="fade-up" data-aos-duration="1200">
+                    <a href="#contact" className="header-btn9">Get Started Today <i className="fa-solid fa-arrow-right"></i></a>
+                    <a href="#contact" className="header-btn10">Request a Consultation <i className="fa-solid fa-arrow-right"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </MainLayout>
+  )
+}
+
+
+

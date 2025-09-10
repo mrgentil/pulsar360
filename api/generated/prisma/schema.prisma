@@ -1,0 +1,138 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String
+  role      Role     @default(EDITOR)
+  members   Member[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Brand     Brand[]
+}
+
+model Brand {
+  id        String    @id @default(cuid())
+  name      String
+  locale    String    @default("fr")
+  tone      String? // ton de marque
+  ctas      String[] // CTA favoris
+  ownerId   String
+  owner     User      @relation(fields: [ownerId], references: [id])
+  members   Member[]
+  channels  Channel[]
+  contents  Content[]
+  media     Media[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Contact   Contact[]
+}
+
+model Member {
+  id      String @id @default(cuid())
+  brandId String
+  userId  String
+  role    Role   @default(EDITOR)
+  brand   Brand  @relation(fields: [brandId], references: [id])
+  user    User   @relation(fields: [userId], references: [id])
+
+  @@unique([brandId, userId])
+}
+
+model Channel {
+  id        String      @id @default(cuid())
+  brandId   String
+  type      ChannelType
+  status    String      @default("disconnected")
+  token     String? // tokens chiffrés côté app
+  brand     Brand       @relation(fields: [brandId], references: [id])
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+model Media {
+  id        String    @id @default(cuid())
+  brandId   String
+  url       String
+  kind      MediaKind
+  tags      String[]
+  brand     Brand     @relation(fields: [brandId], references: [id])
+  createdAt DateTime  @default(now())
+}
+
+model Content {
+  id          String        @id @default(cuid())
+  brandId     String
+  type        ContentType // post | email | wa
+  title       String?
+  body        String
+  mediaIds    String[] // références Media.id
+  status      ContentStatus @default(DRAFT)
+  scheduledAt DateTime?
+  brand       Brand         @relation(fields: [brandId], references: [id])
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model PublishLog {
+  id        String      @id @default(cuid())
+  contentId String
+  channel   ChannelType
+  status    String // success | failed
+  error     String?
+  ts        DateTime    @default(now())
+}
+
+model Contact {
+  id        String   @id @default(cuid())
+  brandId   String
+  email     String?
+  phone     String?
+  consent   Boolean  @default(true)
+  tags      String[]
+  brand     Brand    @relation(fields: [brandId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+enum Role {
+  OWNER
+  ADMIN
+  EDITOR
+  VIEWER
+}
+
+enum ChannelType {
+  INSTAGRAM
+  FACEBOOK
+  EMAIL
+  WHATSAPP
+  SMS
+}
+
+enum MediaKind {
+  IMAGE
+  VIDEO
+}
+
+enum ContentType {
+  POST
+  EMAIL
+  WA
+}
+
+enum ContentStatus {
+  DRAFT
+  REVIEW
+  APPROVED
+  SCHEDULED
+  PUBLISHED
+}
