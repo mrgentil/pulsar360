@@ -1,28 +1,35 @@
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+﻿import type { Metadata } from 'next';
 import NewsLetter from "@/components/NewsLetter";
 import Link from 'next/link'
+
+export const metadata: Metadata = {
+  title: 'Contact | Pulsar360',
+  description: 'Get in touch with the Pulsar360 team. Weâ€™ll get back to you quickly.',
+  openGraph: {
+    title: 'Contact | Pulsar360',
+    description: 'Get in touch with the Pulsar360 team. Weâ€™ll get back to you quickly.',
+  },
+};
 
 export default function Contact() {
   return (
       <>
-          <Header/>
-        
-              {/* BredCrumb-Section */}
+          
+      {/* BredCrumb-Section */}
               <div className="bred_crumb">
                   <div className="container">
                       {/* shape animation  */}
                       <span className="banner_shape1">
         {" "}
-                          <img src="images/banner-shape1.png" alt="image" />{" "}
+                          <img src="/images/banner-shape1.png" alt="image" />{" "}
       </span>
                       <span className="banner_shape2">
         {" "}
-                          <img src="images/banner-shape2.png" alt="image" />{" "}
+                          <img src="/images/banner-shape2.png" alt="image" />{" "}
       </span>
                       <span className="banner_shape3">
         {" "}
-                          <img src="images/banner-shape3.png" alt="image" />{" "}
+                          <img src="/images/banner-shape3.png" alt="image" />{" "}
       </span>
                       <div className="bred_text">
                           <h1>Contact us</h1>
@@ -32,13 +39,13 @@ export default function Contact() {
                           </p>
                           <ul>
                               <li>
-                                  <a href="index.html">Home</a>
+                                  <Link href="/">Home</Link>
                               </li>
                               <li>
-                                  <span>»</span>
+                                  <span>›</span>
                               </li>
                               <li>
-                                  <a href="contact.html">Contact us</a>
+                                  <Link href="/contact">Contact us</Link>
                               </li>
                           </ul>
                       </div>
@@ -178,7 +185,10 @@ export default function Contact() {
 
 
           <NewsLetter/>
-          <Footer/>
+          
       </>
   )
 }
+ 
+
+

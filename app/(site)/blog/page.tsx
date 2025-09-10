@@ -1,12 +1,20 @@
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+﻿import type { Metadata } from 'next';
 import NewsLetter from "@/components/NewsLetter";
 import Link from 'next/link'
+
+export const metadata: Metadata = {
+  title: 'Blog | Pulsar360',
+  description: 'Discover product updates, marketing tips and insights from the Pulsar360 team.',
+  openGraph: {
+    title: 'Blog | Pulsar360',
+    description: 'Discover product updates, marketing tips and insights from the Pulsar360 team.',
+  },
+};
 
 export default function Blog() {
   return (
       <>
-      <Header/>
+      
 
               {/* BredCrumb-Section */}
               <div className="bred_crumb">
@@ -28,13 +36,13 @@ export default function Blog() {
                           <h1>Latest blog post</h1>
                           <ul>
                               <li>
-                                  <a href="index.html">Home</a>
+                                  <Link href="/">Home</Link>
                               </li>
                               <li>
-                                  <span>»</span>
+                                  <span>›</span>
                               </li>
                               <li>
-                                  <a href="blog-list.html">Blog list</a>
+                                  <Link href="/blog">Blog list</Link>
                               </li>
                           </ul>
                           <div className="search_bar">
@@ -391,7 +399,10 @@ export default function Blog() {
               {/* Story-Section-end */}
 
       <NewsLetter/>
-    <Footer/>
+    
     </>
   )
 }
+ 
+
+

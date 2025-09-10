@@ -1,42 +1,48 @@
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+﻿import type { Metadata } from 'next';
 import Trusted from '@/components/Trusted';
 import NewsLetter from "@/components/NewsLetter";
 import Link from 'next/link'
 
+export const metadata: Metadata = {
+  title: 'About | Pulsar360',
+  description: 'Learn about Pulsar360 â€” our mission, team, and how we help you manage and scale your marketing performance.',
+  openGraph: {
+    title: 'About | Pulsar360',
+    description: 'Learn about Pulsar360 â€” our mission, team, and how we help you manage and scale your marketing performance.',
+  },
+};
+
 export default function About() {
   return (
       <>
-   <Header/>
-
-
+   
               {/* BredCrumb-Section */}
               <div className="bred_crumb">
                   <div className="container">
                       {/* shape animation  */}
                       <span className="banner_shape1">
         {" "}
-                          <img src="images/banner-shape1.png" alt="image" />{" "}
+                          <img src="/images/banner-shape1.png" alt="image" />{" "}
       </span>
                       <span className="banner_shape2">
         {" "}
-                          <img src="images/banner-shape2.png" alt="image" />{" "}
+                          <img src="/images/banner-shape2.png" alt="image" />{" "}
       </span>
                       <span className="banner_shape3">
         {" "}
-                          <img src="images/banner-shape3.png" alt="image" />{" "}
+                          <img src="/images/banner-shape3.png" alt="image" />{" "}
       </span>
                       <div className="bred_text">
                           <h1>About us</h1>
                           <ul>
                               <li>
-                                  <a href="index.html">Home</a>
+                                  <Link href="/">Home</Link>
                               </li>
                               <li>
-                                  <span>»</span>
+                                  <span>›</span>
                               </li>
                               <li>
-                                  <a href="about.html">About us</a>
+                                  <Link href="/about">About us</Link>
                               </li>
                           </ul>
                       </div>
@@ -269,7 +275,7 @@ export default function About() {
                     <span className="counter-value" data-count={17}>
                       0
                     </span>
-                                                  <span>M+</span>
+                                                  <span>›</span>
                                               </p>
                                               <p>Download</p>
                                           </div>
@@ -283,7 +289,7 @@ export default function About() {
                     <span className="counter-value" data-count={" "}>
                       0{" "}
                     </span>
-                                                  <span>M+</span>
+                                                  <span>›</span>
                                               </p>
                                               <p>Followers</p>
                                           </div>
@@ -297,7 +303,7 @@ export default function About() {
                     <span className="counter-value" data-count={2300}>
                       1500
                     </span>
-                                                  <span>+</span>
+                                                  <span>›</span>
                                               </p>
                                               <p>Reviews</p>
                                           </div>
@@ -311,7 +317,7 @@ export default function About() {
                     <span className="counter-value" data-count={150}>
                       0
                     </span>
-                                                  <span>+</span>
+                                                  <span>›</span>
                                               </p>
                                               <p>Countries</p>
                                           </div>
@@ -481,15 +487,15 @@ export default function About() {
                           {/* shape animation  */}
                           <span className="banner_shape1">
           {" "}
-                              <img src="images/banner-shape1.png" alt="image" />{" "}
+                              <img src="/images/banner-shape1.png" alt="image" />{" "}
         </span>
                           <span className="banner_shape2">
           {" "}
-                              <img src="images/banner-shape2.png" alt="image" />{" "}
+                              <img src="/images/banner-shape2.png" alt="image" />{" "}
         </span>
                           <span className="banner_shape3">
           {" "}
-                              <img src="images/banner-shape3.png" alt="image" />{" "}
+                              <img src="/images/banner-shape3.png" alt="image" />{" "}
         </span>
                           <div className="section_title">
                               <h2>Have any query about ?</h2>
@@ -498,9 +504,9 @@ export default function About() {
                                   <br /> indus orem Ipsum has beenthe standard dummy.
                               </p>
                           </div>
-                          <a href="contact.html" className="btn white_btn">
+                          <Link href="/contact" className="btn white_btn">
                               CONTACT US NOW
-                          </a>
+                          </Link>
                       </div>
                   </div>
               </section>
@@ -508,7 +514,11 @@ export default function About() {
 
           <Trusted/>
           <NewsLetter/>
-    <Footer/>
+    
     </>
   )
 }
+ 
+
+
+

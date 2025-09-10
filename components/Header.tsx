@@ -1,3 +1,7 @@
+import Link from "next/link";
+import Image from "next/image";
+import { LogIn, UserPlus } from "lucide-react";
+
 export default function Header() {
     return (
         <header>
@@ -5,9 +9,9 @@ export default function Header() {
             <div className="container">
                 {/* navigation bar */}
                 <nav className="navbar navbar-expand-lg">
-                    <a className="navbar-brand" href="#">
-                        <img src="/images/logo.png" alt="image" />
-                    </a>
+                    <Link className="navbar-brand" href="/">
+                        <Image src="/images/logo.png" alt="Pulsar360" width={120} height={32} priority />
+                    </Link>
                     <button
                         className="navbar-toggler"
                         type="button"
@@ -28,50 +32,56 @@ export default function Header() {
                         <ul className="navbar-nav ml-auto">
                             {/* secondery menu start */}
                             <li className="nav-item has_dropdown">
-                                <a className="nav-link" href="/">
+                                <Link className="nav-link" href="/">
                                     Accueil
-                                </a>
+                                </Link>
                             </li>
                             {/* secondery menu end */}
                             <li className="nav-item">
-                                <a className="nav-link" href="#features">
+                                <Link className="nav-link" href="#features">
                                     Features
-                                </a>
+                                </Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#how_it_work">
+                                <Link className="nav-link" href="#how_it_work">
                                     How it works
-                                </a>
+                                </Link>
                             </li>
                             {/* secondery menu start */}
                             <li className="nav-item has_dropdown">
-                                <a className="nav-link" href="/about">
+                                <Link className="nav-link" href="/about">
                                     Pulsar360
-                                </a>
+                                </Link>
                             </li>
                             {/* secondery menu end */}
                             <li className="nav-item">
-                                <a className="nav-link" href="#pricing">
+                                <Link className="nav-link" href="#pricing">
                                     Prix
-                                </a>
+                                </Link>
                             </li>
                             {/* secondery menu start */}
                             <li className="nav-item has_dropdown">
-                                <a className="nav-link" href="/blog">
+                                <Link className="nav-link" href="/blog">
                                     Blog
-                                </a>
+                                </Link>
                             </li>
                             {/* secondery menu end */}
                             <li className="nav-item">
-                                <a className="nav-link" href="/contact">
+                                <Link className="nav-link" href="/contact">
                                     Contact
-                                </a>
+                                </Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link dark_btn" href="/contact">
-                                    GET STARTED
-                                </a>
+                                <Link className="nav-link" href="/login">
+                                    Connexion
+                                </Link>
                             </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" href="/register">
+                                    Inscription
+                                </Link>
+                            </li>
+
                         </ul>
                     </div>
                 </nav>
