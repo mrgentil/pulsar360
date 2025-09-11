@@ -2,6 +2,7 @@
 "use client"
 import { useState } from 'react'
 import { login as apiLogin } from '@/lib/auth'
+import { apiBaseURL } from '@/lib/api'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-hot-toast'
 
@@ -71,9 +72,9 @@ export default function LoginPage() {
                       </p>
                       <div className="or_option">
                           <p>Sign In with your work email</p>
-                          <a href="#" className="btn google_btn">
+                          <a href={`${apiBaseURL}/auth/google`} className="btn google_btn">
                               <img src="images/google.png" alt="image" />{" "}
-                              <span>Sign Up with Google</span>{" "}
+                              <span>Sign In with Google</span>{" "}
                           </a>
                           <p>
                               Don't have an account? <a href="/register">Sign Up here</a>

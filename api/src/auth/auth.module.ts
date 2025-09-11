@@ -5,6 +5,7 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { PrismaService } from '../prisma.service';
 import { JwtStrategy } from './jwt.strategy';
+import { GoogleStrategy } from './google.strategy';
 import { MailerModule } from '../mailer/mailer.module';
 
 @Module({
@@ -16,7 +17,7 @@ import { MailerModule } from '../mailer/mailer.module';
       signOptions: { expiresIn: process.env.JWT_EXPIRES || '7d' },
     }),
   ],
-  providers: [AuthService, PrismaService, JwtStrategy],
+  providers: [AuthService, PrismaService, JwtStrategy, GoogleStrategy],
   controllers: [AuthController],
   exports: [JwtModule],
 })

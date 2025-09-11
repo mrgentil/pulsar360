@@ -1,10 +1,12 @@
-import { Body, Controller, Get, HttpCode, Post, Query, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Post, Query, Req, Res, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { Throttle } from '@nestjs/throttler';
 import { JwtAuthGuard } from './jwt.guard';
 import { PrismaService } from '../prisma.service';
+import { AuthGuard } from '@nestjs/passport';
+import type { Response } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -40,8 +42,29 @@ export class AuthController {
     if (!userId) return null;
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
-      select: { id: true, email: true, name: true, role: true, isEmailVerified: true },
+      select: { id: true, email: true, name: true, role: true, isEmailVerified: true, avatarUrl: true },
     });
     return { user };
+  }
+
+  // Google OAuth
+  @Get('google')
+  @UseGuards(AuthGuard('google'))
+  async googleAuth() { /* redirection vers Google */ }
+
+  @Get('google/callback')
+  @UseGuards(AuthGuard('google'))
+  async googleCallback(@Req() req: any, @Res() res: Response) {
+    const data = req.user as { email?: string; name?: string; avatarUrl?: string; providerId: string; provider: 'google' };
+    const result = await this.auth.oauthLogin({
+      email: data.email || null,
+      name: data.name || null,
+      avatarUrl: data.avatarUrl || null,
+      provider: 'google',
+      providerId: data.providerId,
+    });
+    const front = process.env.FRONT_BASE_URL || 'http://localhost:3000';
+    const url = `${front.replace(/\/$/, '')}/auth/social/callback?token=${encodeURIComponent(result.token)}`;
+    return res.redirect(url);
   }
 }

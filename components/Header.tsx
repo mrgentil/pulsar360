@@ -19,7 +19,7 @@ function initialsOf(name?: string | null, email?: string) {
 }
 
 export default function Header() {
-    const [user, setUser] = useState<{ name: string | null; email: string } | null>(null);
+    const [user, setUser] = useState<{ name: string | null; email: string; avatarUrl?: string | null } | null>(null);
     const [open, setOpen] = useState(false);
     const menuRef = useRef<HTMLLIElement | null>(null);
     const router = useRouter();
@@ -111,30 +111,34 @@ export default function Header() {
                                 </Link>
                             </li>
                             {user ? (
-                              <li className="nav-item has_dropdown" ref={menuRef}>
-                                <a
-                                  className="nav-link"
-                                  href="#"
-                                  onClick={(e) => { e.preventDefault(); setOpen(v=>!v); }}
-                                  aria-haspopup="true"
-                                  aria-expanded={open}
-                                  title={user.email}
-                                >
-                                  <span
-                                    style={{
-                                      width: 32,
-                                      height: 32,
-                                      borderRadius: "50%",
-                                      background: "#6c63ff",
-                                      color: "#fff",
-                                      display: "inline-flex",
-                                      alignItems: "center",
-                                      justifyContent: "center",
-                                      fontWeight: 700,
-                                      letterSpacing: 0.5,
-                                    }}
-                                  >{letters}</span>
-                                </a>
+                                <li className="nav-item has_dropdown" ref={menuRef}>
+                                  <a
+                                    className="nav-link"
+                                    href="#"
+                                    onClick={(e) => { e.preventDefault(); setOpen(v=>!v); }}
+                                    aria-haspopup="true"
+                                    aria-expanded={open}
+                                    title={user.email}
+                                  >
+                                  {user.avatarUrl ? (
+                                    <img src={user.avatarUrl} alt="avatar" style={{ width: 32, height: 32, borderRadius: '50%', objectFit: 'cover' }} />
+                                  ) : (
+                                    <span
+                                      style={{
+                                        width: 32,
+                                        height: 32,
+                                        borderRadius: "50%",
+                                        background: "#6c63ff",
+                                        color: "#fff",
+                                        display: "inline-flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        fontWeight: 700,
+                                        letterSpacing: 0.5,
+                                      }}
+                                    >{letters}</span>
+                                  )}
+                                  </a>
                                 {open && (
                                   <ul className="sub_menu" style={{ display: 'block' }}>
                                     <li><Link href="/app" className="nav-link">Dashboard</Link></li>

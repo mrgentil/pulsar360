@@ -1,6 +1,7 @@
 "use client"
 import { useState } from 'react'
 import { register as apiRegister } from '@/lib/auth'
+import { apiBaseURL } from '@/lib/api'
 import { toast } from 'react-hot-toast'
 
 export default function RegisterPage() {
@@ -67,7 +68,7 @@ export default function RegisterPage() {
                       </p>
                       <div className="or_option">
                           <p>Sign up with your work email</p>
-                          <a href="#" className="btn google_btn">
+                          <a href={`${apiBaseURL}/auth/google`} className="btn google_btn">
                               <img src="/images/google.png" alt="image" />{" "}
                               <span>Sign Up with Google</span>{" "}
                           </a>

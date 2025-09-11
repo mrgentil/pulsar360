@@ -21,6 +21,43 @@ export class AuthService {
     return this.jwt.sign({ sub, email });
   }
 
+  async oauthLogin(params: { email?: string | null; name?: string | null; avatarUrl?: string | null; provider: 'google'; providerId: string }) {
+    const email = params.email?.toLowerCase().trim();
+    if (!email) {
+      throw new BadRequestException("Impossible d'obtenir l'e-mail depuis Google");
+    }
+
+    const publicSelect = { id: true, email: true, name: true, role: true, isEmailVerified: true, avatarUrl: true } as const;
+    let user = await this.prisma.user.findUnique({ where: { email }, select: publicSelect });
+    if (!user) {
+      // Crée l'utilisateur avec un mot de passe aléatoire et email vérifié
+      const password = randomBytes(24).toString('hex');
+      user = await this.prisma.user.create({
+        data: {
+          email,
+          name: params.name || null,
+          password,
+          role: 'EDITOR' as any,
+          isEmailVerified: true,
+          avatarUrl: params.avatarUrl || null,
+          provider: params.provider,
+          providerId: params.providerId,
+        },
+        select: publicSelect,
+      });
+    } else {
+      // Associe/actualise le provider et l'avatar si fourni
+      await this.prisma.user.update({
+        where: { email },
+        data: { provider: params.provider, providerId: params.providerId, avatarUrl: params.avatarUrl || undefined },
+      });
+    }
+
+    if (!user) throw new BadRequestException('Connexion OAuth échouée');
+    const token = this.sign(user.id, user.email);
+    return { user, token };
+  }
+
   private buildVerifyUrl(token: string) {
     const baseFront = process.env.FRONT_BASE_URL; // si tu veux que le front gère l’activation
     const baseApi = process.env.APP_BASE_URL;     // sinon, lien direct vers l’API

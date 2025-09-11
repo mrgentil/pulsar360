@@ -7,10 +7,10 @@ if (typeof window !== 'undefined') {
   toast = require('react-hot-toast').toast
 }
 
-const baseURL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api'
+export const apiBaseURL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api'
 
 export const api = axios.create({
-  baseURL,
+  baseURL: apiBaseURL,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',

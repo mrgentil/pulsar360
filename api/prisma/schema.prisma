@@ -12,8 +12,12 @@ model User {
   email            String   @unique
   name             String?
   password         String
+  avatarUrl        String?
   role             Role     @default(EDITOR)
   isEmailVerified  Boolean  @default(false)
+  // OAuth provider (ex: 'google') et identifiant fournisseur
+  provider         String?
+  providerId       String?
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 
@@ -23,6 +27,7 @@ model User {
   tokens   VerificationToken[]
 
   @@index([createdAt])
+  @@unique([provider, providerId])
 }
 
 model Brand {

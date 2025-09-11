@@ -45,5 +45,5 @@ export function logout() {
 
 export async function getMe() {
   const { data } = await api.get('/auth/me')
-  return data as { user: { id: string; email: string; name: string | null; role: string; isEmailVerified: boolean } }
+  return data as { user: { id: string; email: string; name: string | null; role: string; isEmailVerified: boolean; avatarUrl: string | null } }
 }
