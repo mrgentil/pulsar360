@@ -1,17 +1,37 @@
+"use client"
+import { useState } from 'react'
+import { register as apiRegister } from '@/lib/auth'
+import { toast } from 'react-hot-toast'
 
 export default function RegisterPage() {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
 
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    setLoading(true)
+    try {
+      const res = await apiRegister({ name, email, password })
+      toast.success(res?.message || "Vérifie ta boîte mail pour activer ton compte.")
+    } catch (err: any) {
+      toast.error(err?.response?.data?.message || "Erreur lors de l'inscription")
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
       <div className="full_bg">
           <div className="container">
               <section className="signup_section">
                   <div className="top_part">
-                      <a href="index.html" className="back_btn">
+                      <a href="/" className="back_btn">
                           <i className="icofont-arrow-left" /> Back
                       </a>
                       <a className="navbar-brand" href="#">
-                          <img src="images/footer_logo.png" alt="image" />
+                          <img src="/images/footer_logo.png" alt="image" />
                       </a>
                   </div>
                   {/* Comment Form Section */}
@@ -26,23 +46,19 @@ export default function RegisterPage() {
                               never send you spam
                           </p>
                       </div>
-                      <form action="#">
+                      <form onSubmit={onSubmit}>
                           <div className="form-group">
-                              <input type="text" className="form-control" placeholder="Name" />
+                              <input value={name} onChange={e=>setName(e.target.value)} type="text" className="form-control" placeholder="Name" required />
                           </div>
                           <div className="form-group">
-                              <input type="email" className="form-control" placeholder="Email" />
+                              <input value={email} onChange={e=>setEmail(e.target.value)} type="email" className="form-control" placeholder="Email" required />
                           </div>
                           <div className="form-group">
-                              <input
-                                  type="password"
-                                  className="form-control"
-                                  placeholder="Password"
-                              />
+                              <input value={password} onChange={e=>setPassword(e.target.value)} type="password" className="form-control" placeholder="Password" required />
                           </div>
                           <div className="form-group">
-                              <button className="btn puprple_btn" type="submit">
-                                  SIGN UP
+                              <button className="btn puprple_btn" type="submit" disabled={loading}>
+                                  {loading ? 'En cours...' : 'ISNCRIPTION'}
                               </button>
                           </div>
                       </form>
@@ -52,11 +68,11 @@ export default function RegisterPage() {
                       <div className="or_option">
                           <p>Sign up with your work email</p>
                           <a href="#" className="btn google_btn">
-                              <img src="images/google.png" alt="image" />{" "}
+                              <img src="/images/google.png" alt="image" />{" "}
                               <span>Sign Up with Google</span>{" "}
                           </a>
                           <p>
-                              Already have an account? <a href="#">Sign In here</a>
+                              Already have an account? <a href="/login">Sign In here</a>
                           </p>
                       </div>
                   </div>

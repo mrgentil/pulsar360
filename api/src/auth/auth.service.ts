@@ -28,7 +28,8 @@ export class AuthService {
 
     if (baseFront) return `${baseFront}${path}`;
     if (baseApi)   return `${baseApi}${path}`;
-    return `http://localhost:3000${path}`;
+    const port = process.env.PORT || '3001';
+    return `http://localhost:${port}/api${path}`;
   }
 
   async register(dto: RegisterDto) {

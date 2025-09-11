@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
+import ToasterProvider from "@/components/toaster-provider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -46,7 +47,9 @@ export default function RootLayout({
           <div id="preloader">
             <div id="loader"></div>
           </div>
+          {/* Header du site géré dans app/(site)/layout.tsx pour éviter les doublons */}
           {children}
+          <ToasterProvider />
         </div>
         <Script src="/js/jquery.js" strategy="beforeInteractive" />
         <Script src="/js/owl.carousel.min.js" strategy="afterInteractive" />
@@ -57,4 +60,3 @@ export default function RootLayout({
     </html>
   );
 }
-
