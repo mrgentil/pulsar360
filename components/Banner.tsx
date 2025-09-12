@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Banner() {
     return (
         <>
@@ -44,45 +46,25 @@ export default function Banner() {
                         >
                             {/* banner text */}
                             <div className="banner_text">
-                                {/* h1 */}
                                 <h1>
-                                    Best way to <span>manage your customers.</span>
+                                    Le studio marketing tout-en-un pour <span>planifier, créer et analyser</span>
                                 </h1>
-                                {/* p */}
                                 <p>
-                                    Lorem Ipsum is simply dummy text of the printing and setting indus
-                                    orem Ipsum has been the industrys.
+                                    Pulsar360 centralise vos réseaux sociaux, e-mails et campagnes. Gagnez du temps avec l’IA pour rédiger,
+                                    collaborez en équipe et mesurez ce qui compte vraiment.
                                 </p>
                             </div>
                             {/* app buttons */}
                             <ul className="app_btn">
                                 <li>
-                                    <a href="#">
-                                        <img
-                                            className="blue_img"
-                                            src="/images/appstore_blue.png"
-                                            alt="image"
-                                        />
-                                        <img
-                                            className="white_img"
-                                            src="/images/appstore_white.png"
-                                            alt="image"
-                                        />
-                                    </a>
+                                    <Link href="/register" className="btn btn-outline">
+                                        Commencer gratuitement
+                                    </Link>
                                 </li>
                                 <li>
-                                    <a href="#">
-                                        <img
-                                            className="blue_img"
-                                            src="/images/googleplay_blue.png"
-                                            alt="image"
-                                        />
-                                        <img
-                                            className="white_img"
-                                            src="/images/googleplay_white.png"
-                                            alt="image"
-                                        />
-                                    </a>
+                                    <Link href="/login" className="btn btn-outline">
+                                        Voir la démo
+                                    </Link>
                                 </li>
                             </ul>
                             {/* users */}

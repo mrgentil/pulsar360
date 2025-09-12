@@ -13,12 +13,12 @@ export default function Features() {
                     >
                         {/* h2 */}
                         <h2>
-                            <span>Features</span> that makes app different!
+                            <span>Planner </span>Intelligent!
                         </h2>
                         {/* p */}
                         <p>
-                            Lorem Ipsum is simply dummy text of the printing and typese tting{" "}
-                            <br /> indus orem Ipsum has beenthe standard dummy.
+                            Planifiez vos posts multi-canaux (Instagram, Facebook, Email, WhatsApp)
+                            <br /> en quelques clics avec des créneaux optimisés.
                         </p>
                     </div>
                     <div className="feature_detail">
@@ -31,13 +31,12 @@ export default function Features() {
                                 data-aos-duration={1500}
                             >
                                 <div className="icon">
-                                    <img src="images/secure_data.png" alt="image" />
+                                    <img src="/images/secure_data.png" alt="image" />
                                 </div>
                                 <div className="text">
-                                    <h4>Secure data</h4>
+                                    <h4>Composer IA</h4>
                                     <p>
-                                        Lorem Ipsum is simply dummy text of the printing and type
-                                        setting indus ideas.
+                                        Générez, réécrivez et traduisez vos contenus avec un ton adapté à votre marque.
                                     </p>
                                 </div>
                             </div>
@@ -48,13 +47,12 @@ export default function Features() {
                                 data-aos-duration={1500}
                             >
                                 <div className="icon">
-                                    <img src="images/functional.png" alt="image" />
+                                    <img src="/images/functional.png" alt="image" />
                                 </div>
                                 <div className="text">
-                                    <h4>Fully functional</h4>
+                                    <h4>Inbox Unifiée</h4>
                                     <p>
-                                        Simply dummy text of the printing and typesetting indus lorem
-                                        Ipsum is dummy.
+                                        Centralisez les messages et commentaires, priorisez et répondez plus vite.
                                     </p>
                                 </div>
                             </div>
@@ -68,13 +66,12 @@ export default function Features() {
                                 data-aos-duration={1500}
                             >
                                 <div className="icon">
-                                    <img src="images/live-chat.png" alt="image" />
+                                    <img src="/images/live-chat.png" alt="image" />
                                 </div>
                                 <div className="text">
-                                    <h4>Live chat</h4>
+                                    <h4>Analytics Clairs</h4>
                                     <p>
-                                        Lorem Ipsum is simply dummy text of the printing and type
-                                        setting indus ideas.
+                                        Suivez portée, engagement, CTR et croissance. Décidez avec des KPI utiles.
                                     </p>
                                 </div>
                             </div>
@@ -85,13 +82,12 @@ export default function Features() {
                                 data-aos-duration={1500}
                             >
                                 <div className="icon">
-                                    <img src="images/support.png" alt="image" />
+                                    <img src="/images/support.png" alt="image" />
                                 </div>
                                 <div className="text">
-                                    <h4>24-7 Support</h4>
+                                    <h4>Collaboration & Rôles</h4>
                                     <p>
-                                        Simply dummy text of the printing and typesetting indus lorem
-                                        Ipsum is dummy.
+                                        Invitez votre équipe, gérez les rôles (OWNER/ADMIN/EDITOR/VIEWER) et travaillez en sécurité.
                                     </p>
                                 </div>
                             </div>
@@ -103,7 +99,7 @@ export default function Features() {
                             data-aos-duration={1500}
                             data-aos-delay={100}
                         >
-                            <img src="images/features_frame.png" alt="image" />
+                            <img src="/images/features_frame.png" alt="image" />
                         </div>
                     </div>
                 </div>

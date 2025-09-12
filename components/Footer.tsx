@@ -153,13 +153,13 @@ export default function Footer() {
           {/* row start */}
           <div className="row">
             <div className="col-md-6">
-              <p>© Copyrights 2022. All rights reserved.</p>
+              <p>© Copyrights 2025. All rights reserved.</p>
             </div>
             <div className="col-md-6">
               <p className="developer_text">
                 Design &amp; developed by{" "}
                 <Link href="https://themeforest.net/user/kalanidhithemes" target="_blank">
-                  Kalanidhi Themes
+                  Owr Digi
                 </Link>
               </p>
             </div>

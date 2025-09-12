@@ -17,14 +17,14 @@ export default function AboutApp() {
                                 <div className="frame_img">
                                     <img
                                         className="moving_position_animatin"
-                                        src="images/about-frame.png"
+                                        src="/images/about-frame.png"
                                         alt="image"
                                     />
                                 </div>
                                 <div className="screen_img">
                                     <img
                                         className="moving_animation"
-                                        src="images/about-screen.png"
+                                        src="/images/about-screen.png"
                                         alt="image"
                                     />
                                 </div>
@@ -41,7 +41,8 @@ export default function AboutApp() {
                                 >
                                     {/* h2 */}
                                     <h2>
-                                        Some awesome words <span>about app.</span>
+
+                                        Quelques mots élogieux <span>à propos de l'application.</span>
                                     </h2>
                                     {/* p */}
                                     <p>

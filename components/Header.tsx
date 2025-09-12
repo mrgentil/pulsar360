@@ -70,38 +70,38 @@ export default function Header() {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav ml-auto">
                             {/* secondery menu start */}
-                            <li className="nav-item has_dropdown">
+                            {/*<li className="nav-item has_dropdown">
                                 <Link className="nav-link" href="/">
                                     Accueil
                                 </Link>
-                            </li>
+                            </li>*/}
                             {/* secondery menu end */}
                             <li className="nav-item">
                                 <Link className="nav-link" href="#features">
-                                    Features
+                                    Produit
                                 </Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" href="#how_it_work">
-                                    How it works
+                                    Comment ça marche
                                 </Link>
                             </li>
                             {/* secondery menu start */}
-                            <li className="nav-item has_dropdown">
+                          {/*  <li className="nav-item has_dropdown">
                                 <Link className="nav-link" href="/about">
                                     Pulsar360
                                 </Link>
-                            </li>
+                            </li>*/}
                             {/* secondery menu end */}
                             <li className="nav-item">
                                 <Link className="nav-link" href="#pricing">
-                                    Prix
+                                    Tarifs
                                 </Link>
                             </li>
                             {/* secondery menu start */}
                             <li className="nav-item has_dropdown">
                                 <Link className="nav-link" href="/blog">
-                                    Blog
+                                    Ressources
                                 </Link>
                             </li>
                             {/* secondery menu end */}
@@ -152,10 +152,10 @@ export default function Header() {
                             ) : (
                               <>
                                 <li className="nav-item">
-                                  <Link className="nav-link" href="/login">Connexion</Link>
+                                  <Link className="nav-link" href="/login">Se connecter</Link>
                                 </li>
                                 <li className="nav-item">
-                                  <Link className="nav-link" href="/register">Inscription</Link>
+                                  <Link className="nav-link" href="/register">Essai gratuit</Link>
                                 </li>
                               </>
                             )}

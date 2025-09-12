@@ -13,13 +13,11 @@ export default function Testimonial() {
                     >
                         {/* h2 */}
                         <h2>
-                            What our <span>customer say</span>
+
+                            Ils gagnent du temps avec <span>Pulsar360</span>
+
                         </h2>
                         {/* p */}
-                        <p>
-                            Lorem Ipsum is simply dummy text of the printing and typese tting{" "}
-                            <br /> indus orem Ipsum has beenthe standard dummy.
-                        </p>
                     </div>
                     <div
                         className="testimonial_block"
@@ -32,30 +30,29 @@ export default function Testimonial() {
                                 <div className="testimonial_slide_box">
                                     <div className="rating">
                 <span>
-                  <i className="icofont-star" />
+                  <i className="icofont-star"/>
                 </span>
                                         <span>
-                  <i className="icofont-star" />
+                  <i className="icofont-star"/>
                 </span>
                                         <span>
-                  <i className="icofont-star" />
+                  <i className="icofont-star"/>
                 </span>
                                         <span>
-                  <i className="icofont-star" />
+                  <i className="icofont-star"/>
                 </span>
                                         <span>
-                  <i className="icofont-star" />
+                  <i className="icofont-star"/>
                 </span>
                                     </div>
                                     <p className="review">
-                                        “ Lorem Ipsum is simply dummy text of the printing and typese
-                                        tting us orem Ipsum has been lorem beenthe standar dummy. ”
+                                        “On a gagné 30% de temps sur la planification des campagnes grâce à Pulsar360. ”
                                     </p>
                                     <div className="testimonial_img">
-                                        <img src="images/testimonial_user1.png" alt="image" />
+                                        <img src="/images/testimonial_user1.png" alt="image"/>
                                     </div>
-                                    <h3>Shayna John</h3>
-                                    <span className="designation">Careative inc</span>
+                                    <h3>Sarah M.</h3>
+                                    <span className="designation">Agence Kapiti</span>
                                 </div>
                             </div>
                             {/* user 2 */}
@@ -63,30 +60,29 @@ export default function Testimonial() {
                                 <div className="testimonial_slide_box">
                                     <div className="rating">
                 <span>
-                  <i className="icofont-star" />
+                  <i className="icofont-star"/>
                 </span>
                                         <span>
-                  <i className="icofont-star" />
+                  <i className="icofont-star"/>
                 </span>
                                         <span>
-                  <i className="icofont-star" />
+                  <i className="icofont-star"/>
                 </span>
                                         <span>
-                  <i className="icofont-star" />
+                  <i className="icofont-star"/>
                 </span>
                                         <span>
-                  <i className="icofont-star" />
+                  <i className="icofont-star"/>
                 </span>
                                     </div>
                                     <p className="review">
-                                        “ Lorem Ipsum is simply dummy text of the printing and typese
-                                        tting us orem Ipsum has been lorem beenthe standar dummy. ”
+                                        “ Les suggestions IA nous font gagner des heures chaque semaine.  ”
                                     </p>
                                     <div className="testimonial_img">
-                                        <img src="images/testimonial_user2.png" alt="image" />
+                                        <img src="/images/testimonial_user2.png" alt="image"/>
                                     </div>
-                                    <h3>Willium Den</h3>
-                                    <span className="designation">Careative inc</span>
+                                    <h3>Léon G.</h3>
+                                    <span className="designation">Créateur</span>
                                 </div>
                             </div>
                             {/* user 3 */}
@@ -94,19 +90,19 @@ export default function Testimonial() {
                                 <div className="testimonial_slide_box">
                                     <div className="rating">
                 <span>
-                  <i className="icofont-star" />
+                  <i className="icofont-star"/>
                 </span>
                                         <span>
-                  <i className="icofont-star" />
+                  <i className="icofont-star"/>
                 </span>
                                         <span>
-                  <i className="icofont-star" />
+                  <i className="icofont-star"/>
                 </span>
                                         <span>
-                  <i className="icofont-star" />
+                  <i className="icofont-star"/>
                 </span>
                                         <span>
-                  <i className="icofont-star" />
+                  <i className="icofont-star"/>
                 </span>
                                     </div>
                                     <p className="review">
@@ -114,7 +110,7 @@ export default function Testimonial() {
                                         tting us orem Ipsum has been lorem beenthe standar dummy. ”
                                     </p>
                                     <div className="testimonial_img">
-                                        <img src="images/testimonial_user3.png" alt="image" />
+                                        <img src="images/testimonial_user3.png" alt="image"/>
                                     </div>
                                     <h3>Cyrus Stephen</h3>
                                     <span className="designation">Careative inc</span>
@@ -125,30 +121,30 @@ export default function Testimonial() {
                         <div className="total_review">
                             <div className="rating">
             <span>
-              <i className="icofont-star" />
+              <i className="icofont-star"/>
             </span>
                                 <span>
-              <i className="icofont-star" />
+              <i className="icofont-star"/>
             </span>
                                 <span>
-              <i className="icofont-star" />
+              <i className="icofont-star"/>
             </span>
                                 <span>
-              <i className="icofont-star" />
+              <i className="icofont-star"/>
             </span>
                                 <span>
-              <i className="icofont-star" />
+              <i className="icofont-star"/>
             </span>
                                 <p>5.0 / 5.0</p>
                             </div>
                             <h3>2578</h3>
                             <a href="reviews.html">
-                                TOTAL USER REVIEWS <i className="icofont-arrow-right" />
+                                TOTAL USER REVIEWS <i className="icofont-arrow-right"/>
                             </a>
                         </div>
                         {/* avtar faces */}
                         <div className="avtar_faces">
-                            <img src="images/avtar_testimonial.png" alt="image" />
+                            <img src="images/avtar_testimonial.png" alt="image"/>
                         </div>
                     </div>
                 </div>

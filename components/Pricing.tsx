@@ -13,13 +13,10 @@ export default function Pricing() {
                     >
                         {/* h2 */}
                         <h2>
-                            Best &amp; simple <span>pricing</span>
+                            Tarifs simples et <span>transparents</span>
                         </h2>
+                        <p>Démarrez gratuitement. Passez en Pro quand vous êtes prêt.</p>
                         {/* p */}
-                        <p>
-                            Lorem Ipsum is simply dummy text of the printing and typese tting{" "}
-                            <br /> indus orem Ipsum has beenthe standard dummy.
-                        </p>
                     </div>
                     {/* toggle button */}
                     <div className="toggle_block" data-aos="fade-up" data-aos-duration={1500}>
@@ -42,32 +39,29 @@ export default function Pricing() {
                             <div className="col-md-4">
                                 <div className="pricing_block">
                                     <div className="icon">
-                                        <img src="images/standard.png" alt="image" />
+                                        <img src="/images/standard.png" alt="image" />
                                     </div>
                                     <div className="pkg_name">
-                                        <h3>Standard</h3>
+                                        <h3>Gratuit</h3>
                                         <span>For the basics</span>
                                     </div>
-                                    <span className="price">$15</span>
+                                    <span className="price">0$/mois</span>
                                     <ul className="benifits">
                                         <li>
-                                            <p>Up to 5 Website</p>
+                                            <p>1 Marque</p>
                                         </li>
                                         <li>
-                                            <p>50 GB disk space</p>
+                                            <p>3 Canaux</p>
                                         </li>
                                         <li>
-                                            <p>10 Customize sub pages</p>
+                                            <p>10 posts/mois</p>
                                         </li>
                                         <li>
-                                            <p>2 Domains access</p>
-                                        </li>
-                                        <li>
-                                            <p>Support on request</p>
+                                            <p>Analytics de base.</p>
                                         </li>
                                     </ul>
-                                    <a href="contact.html" className="btn white_btn">
-                                        BUY NOW
+                                    <a href="/buy" className="btn white_btn">
+                                        Essayer
                                     </a>
                                 </div>
                             </div>
@@ -75,32 +69,32 @@ export default function Pricing() {
                             <div className="col-md-4">
                                 <div className="pricing_block highlited_block">
                                     <div className="icon">
-                                        <img src="images/unlimited.png" alt="image" />
+                                        <img src="/images/unlimited.png" alt="image" />
                                     </div>
                                     <div className="pkg_name">
-                                        <h3>Unlimited</h3>
+                                        <h3>Pro</h3>
                                         <span>For the professionals</span>
                                     </div>
-                                    <span className="price">$99</span>
+                                    <span className="price">29$/mois</span>
                                     <ul className="benifits">
                                         <li>
-                                            <p>Unlimited Website</p>
+                                            <p>3 Marques</p>
                                         </li>
                                         <li>
-                                            <p>200 GB disk space</p>
+                                            <p>6 Canaux</p>
                                         </li>
                                         <li>
-                                            <p>20 Customize sub pages</p>
+                                            <p>Posts Illimité</p>
                                         </li>
                                         <li>
-                                            <p>10 Domains access</p>
+                                            <p>IA avancée + Inbox</p>
                                         </li>
                                         <li>
-                                            <p>24/7 Customer support</p>
+                                            <p>Analytics Complets.</p>
                                         </li>
                                     </ul>
-                                    <a href="contact.html" className="btn white_btn">
-                                        BUY NOW
+                                    <a href="/buy" className="btn white_btn">
+                                        Passer en Pro
                                     </a>
                                 </div>
                             </div>
@@ -108,32 +102,28 @@ export default function Pricing() {
                             <div className="col-md-4">
                                 <div className="pricing_block">
                                     <div className="icon">
-                                        <img src="images/premium.png" alt="image" />
+                                        <img src="/images/premium.png" alt="image" />
                                     </div>
                                     <div className="pkg_name">
-                                        <h3>Premium</h3>
+                                        <h3>Business</h3>
                                         <span>For small team</span>
                                     </div>
-                                    <span className="price">$55</span>
+                                    <span className="price">Sur devis</span>
                                     <ul className="benifits">
                                         <li>
-                                            <p>Up to 10 Website</p>
+                                            <p>Marques Illimitées</p>
                                         </li>
                                         <li>
-                                            <p>100 GB disk space</p>
+                                            <p>Rôles avancés, SSO</p>
                                         </li>
                                         <li>
-                                            <p>15 Customize sub pages</p>
+                                            <p>SLA & support prioritaire</p>
                                         </li>
-                                        <li>
-                                            <p>4 Domains access</p>
-                                        </li>
-                                        <li>
-                                            <p>24/7 Customer support</p>
-                                        </li>
+
+
                                     </ul>
-                                    <a href="contact.html" className="btn white_btn">
-                                        BUY NOW
+                                    <a href="/contact" className="btn white_btn">
+                                        Nous contacter
                                     </a>
                                 </div>
                             </div>
@@ -247,8 +237,9 @@ export default function Pricing() {
                     </div>
                     {/* pricing box yearly end */}
                     <p className="contact_text" data-aos="fade-up" data-aos-duration={1500}>
-                        Not sure what to choose ? <a href="contact.html">contact us</a> for
-                        custom packages
+                        Vous ne savez pas quoi choisir ? <a href="/contact">Contactez-nous</a> for
+                        pour des forfaits personnalisés.
+
                     </p>
                 </div>
                 {/* container start end */}

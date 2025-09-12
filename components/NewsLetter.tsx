@@ -13,9 +13,9 @@ export default function NewsLetter() {
                             data-aos-delay={100}
                         >
                             {/* h2 */}
-                            <h2>Subscribe newsletter</h2>
+                            <h2>Recevez nos guides et templates</h2>
                             {/* p */}
-                            <p>Be the first to recieve all latest post in your inbox</p>
+                            <p>Soyez le premier à recevoir toutes les dernières publications dans votre boîte mail.</p>
                         </div>
                         <form
                             action="#"
