@@ -1,3 +1,4 @@
+// prisma/schema.prisma
 generator client {
   provider = "prisma-client-js"
 }
@@ -5,153 +6,6 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-}
-
-model User {
-  id               String   @id @default(cuid())
-  email            String   @unique
-  name             String?
-  password         String
-  avatarUrl        String?
-  role             Role     @default(EDITOR)
-  isEmailVerified  Boolean  @default(false)
-  // OAuth provider (ex: 'google') et identifiant fournisseur
-  provider         String?
-  providerId       String?
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
-
-  // Relations
-  Brand    Brand[]
-  members  Member[]
-  tokens   VerificationToken[]
-
-  @@index([createdAt])
-  @@unique([provider, providerId])
-}
-
-model Brand {
-  id        String    @id @default(cuid())
-  name      String
-  locale    String    @default("fr")
-  tone      String?
-  ctas      String[]  @default([])
-  forbidden String[]  @default([])
-  ownerId   String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-
-  owner     User      @relation(fields: [ownerId], references: [id])
-  channels  Channel[]
-  Contact   Contact[]
-  contents  Content[]
-  media     Media[]
-  members   Member[]
-
-  @@index([ownerId])
-  @@index([createdAt])
-}
-
-model Member {
-  id      String @id @default(cuid())
-  brandId String
-  userId  String
-  role    Role   @default(EDITOR)
-
-  brand   Brand  @relation(fields: [brandId], references: [id])
-  user    User   @relation(fields: [userId], references: [id])
-
-  @@unique([brandId, userId])
-  @@index([userId])
-}
-
-model Channel {
-  id        String      @id @default(cuid())
-  brandId   String
-  type      ChannelType
-  status    String      @default("disconnected")
-  token     String?
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
-
-  brand     Brand       @relation(fields: [brandId], references: [id])
-
-  @@index([brandId])
-  @@index([type])
-}
-
-model Media {
-  id        String    @id @default(cuid())
-  brandId   String
-  url       String
-  kind      MediaKind
-  tags      String[]
-  createdAt DateTime  @default(now())
-
-  brand     Brand     @relation(fields: [brandId], references: [id])
-
-  @@index([brandId])
-  @@index([createdAt])
-}
-
-model Content {
-  id          String        @id @default(cuid())
-  brandId     String
-  type        ContentType
-  title       String?
-  body        String
-  mediaIds    String[]
-  status      ContentStatus @default(DRAFT)
-  scheduledAt DateTime?
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-
-  brand       Brand         @relation(fields: [brandId], references: [id])
-
-  @@index([brandId])
-  @@index([status])
-  @@index([createdAt])
-}
-
-model PublishLog {
-  id        String      @id @default(cuid())
-  contentId String
-  channel   ChannelType
-  status    String
-  error     String?
-  ts        DateTime    @default(now())
-
-  @@index([contentId])
-  @@index([channel])
-  @@index([ts])
-}
-
-model Contact {
-  id        String   @id @default(cuid())
-  brandId   String
-  email     String?
-  phone     String?
-  consent   Boolean  @default(true)
-  tags      String[]
-  createdAt DateTime @default(now())
-
-  brand     Brand    @relation(fields: [brandId], references: [id])
-
-  @@index([brandId])
-  @@index([createdAt])
-}
-
-model VerificationToken {
-  id        String   @id @default(cuid())
-  userId    String
-  token     String   @unique
-  expiresAt DateTime
-  usedAt    DateTime?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([userId])
-  @@index([expiresAt])
 }
 
 enum Role {
@@ -186,4 +40,204 @@ enum ContentStatus {
   APPROVED
   SCHEDULED
   PUBLISHED
+  FAILED
+}
+
+model User {
+  id              String   @id @default(cuid())
+  email           String   @unique
+  name            String?
+  password        String
+  avatarUrl       String?
+  role            Role     @default(EDITOR)
+  isEmailVerified Boolean  @default(false)
+  provider        String?
+  providerId      String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relations
+  Brand   Brand[]
+  members Member[]
+  tokens  VerificationToken[]
+
+  @@unique([provider, providerId])
+  @@index([createdAt])
+}
+
+model Brand {
+  id             String   @id @default(cuid())
+  slug           String?   @unique
+  name           String
+  logoUrl        String?
+  coverUrl       String?
+  primaryColor   String?
+  secondaryColor String?
+  locale         String   @default("fr")
+  timezone       String   @default("Africa/Kinshasa")
+  tone           String?
+  ctas           String[] @default([])
+  forbidden      String[] @default([])
+  ownerId        String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  owner    User      @relation(fields: [ownerId], references: [id])
+  channels Channel[]
+  Contact  Contact[]
+  contents Content[]
+  media    Media[]
+  members  Member[]
+
+  @@index([ownerId])
+  @@index([createdAt])
+}
+
+model Member {
+  id      String @id @default(cuid())
+  brandId String
+  userId  String
+  role    Role   @default(EDITOR)
+
+  brand Brand @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id])
+
+  @@unique([brandId, userId])
+  @@index([userId])
+}
+
+model Channel {
+  id           String      @id @default(cuid())
+  brandId      String
+  type         ChannelType
+  provider     String? // 'meta' | 'google' | 'email' | ...
+  status       String      @default("disconnected") // disconnected|connected|error
+  accessToken  String?
+  refreshToken String?
+  expiresAt    DateTime?
+  meta         Json?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  brand          Brand            @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  ContentChannel ContentChannel[]
+
+  @@unique([brandId, type])
+  @@index([brandId])
+  @@index([type])
+}
+
+model Media {
+  id        String    @id @default(cuid())
+  brandId   String
+  url       String
+  kind      MediaKind
+  mimeType  String?
+  size      Int?
+  width     Int?
+  height    Int?
+  alt       String?
+  thumbnail String?
+  tags      String[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  brand Brand @relation(fields: [brandId], references: [id], onDelete: Cascade)
+
+  @@index([brandId])
+  @@index([createdAt])
+}
+
+model Content {
+  id          String        @id @default(cuid())
+  brandId     String
+  type        ContentType
+  title       String?
+  body        String
+  mediaIds    String[]
+  status      ContentStatus @default(DRAFT)
+  scheduledAt DateTime?
+  approvedBy  String?
+  approvedAt  DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  brand   Brand            @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  targets ContentChannel[]
+  logs    PublishLog[]
+
+  @@index([brandId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model ContentChannel {
+  id          String        @id @default(cuid())
+  contentId   String
+  channelId   String
+  // Variante spécifique par canal (optionnelle)
+  body        String?
+  mediaIds    String[]
+  status      ContentStatus @default(DRAFT)
+  scheduledAt DateTime?
+  publishedAt DateTime?
+  error       String?
+
+  content Content      @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  channel Channel      @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  logs    PublishLog[]
+
+  @@unique([contentId, channelId])
+  @@index([status, scheduledAt])
+}
+
+model PublishLog {
+  id               String   @id @default(cuid())
+  contentChannelId String
+  status           String // success|error
+  error            String?
+  providerCode     String?
+  ts               DateTime @default(now())
+
+  contentChannel ContentChannel @relation(fields: [contentChannelId], references: [id], onDelete: Cascade)
+  Content        Content?       @relation(fields: [contentId], references: [id])
+  contentId      String?
+
+  @@index([contentChannelId])
+  @@index([ts])
+}
+
+model Contact {
+  id             String    @id @default(cuid())
+  brandId        String
+  email          String?
+  phone          String?
+  consent        Boolean   @default(true)
+  consentAt      DateTime  @default(now())
+  unsubscribedAt DateTime?
+  source         String?
+  tags           String[]
+  attributes     Json?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  brand Brand @relation(fields: [brandId], references: [id], onDelete: Cascade)
+
+  @@unique([brandId, email])
+  @@unique([brandId, phone])
+  @@index([brandId])
+  @@index([createdAt])
+}
+
+model VerificationToken {
+  id        String    @id @default(cuid())
+  userId    String
+  token     String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
 }
