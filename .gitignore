@@ -17,6 +17,11 @@
 /.next/
 /out/
 
+# Env & secrets
+.env.local.example
+api/.env
+api/prisma/.env
+
 # production
 /build
 

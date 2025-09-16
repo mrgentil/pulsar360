@@ -165,17 +165,33 @@ window.addEventListener('scroll', function() {
 
 
 
-// --------Magnify-popup
-
+// --------Magnify-popup (safe if plugin missing)
 $(function() {
-    $('.popup-youtube').magnificPopup({
+  try {
+    if ($ && $.fn && typeof $.fn.magnificPopup === 'function') {
+      $('.popup-youtube').magnificPopup({
         disableOn: 700,
         type: 'iframe',
         mainClass: 'mfp-fade',
         removalDelay: 160,
         preloader: false,
         fixedContentPos: false
-    });
+      });
+    } else {
+      // Fallback: open link normally without blocking the page
+      $('.popup-youtube').on('click', function(e){
+        // allow default if target already set; otherwise open new tab
+        if (!this.target) {
+          e.preventDefault();
+          const href = $(this).attr('href');
+          if (href) window.open(href, '_blank','noopener');
+        }
+      });
+    }
+  } catch (e) {
+    // Silently ignore to prevent runtime crash
+    // console.warn('magnificPopup init failed', e);
+  }
 });
 
 
@@ -350,4 +366,3 @@ $(document).ready(function(){
 // INITIALIZE AOS
 
 AOS.init();
-

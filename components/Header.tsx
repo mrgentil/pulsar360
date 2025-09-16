@@ -141,7 +141,7 @@ export default function Header() {
                                   </a>
                                 {open && (
                                   <ul className="sub_menu" style={{ display: 'block' }}>
-                                    <li><Link href="/app" className="nav-link">Dashboard</Link></li>
+                                    <li><Link href="/dashboard" className="nav-link">Dashboard</Link></li>
                                     <li><Link href="/profile" className="nav-link">Profil</Link></li>
                                     <li>
                                       <a className="nav-link" href="#" onClick={(e)=>{e.preventDefault(); logout(); setUser(null); router.push('/login');}}>Déconnexion</a>
