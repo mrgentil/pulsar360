@@ -57,9 +57,10 @@ model User {
   updatedAt       DateTime @updatedAt
 
   // Relations
-  Brand   Brand[]
-  members Member[]
-  tokens  VerificationToken[]
+  Brand         Brand[]
+  members       Member[]
+  tokens        VerificationToken[]
+  revokedTokens RevokedToken[]
 
   @@unique([provider, providerId])
   @@index([createdAt])
@@ -238,6 +239,20 @@ model VerificationToken {
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model RevokedToken {
+  id        String   @id @default(cuid())
+  jti       String   @unique // JWT ID
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([jti])
   @@index([userId])
   @@index([expiresAt])
 }

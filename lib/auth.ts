@@ -47,3 +47,13 @@ export async function getMe() {
   const { data } = await api.get('/auth/me')
   return data as { user: { id: string; email: string; name: string | null; role: string; isEmailVerified: boolean; avatarUrl: string | null } }
 }
+
+export async function forgotPassword(email: string) {
+  const { data } = await api.post('/auth/forgot-password', { email })
+  return data as { ok: boolean; message: string }
+}
+
+export async function resetPassword(token: string, password: string) {
+  const { data } = await api.post('/auth/reset-password', { token, password })
+  return data as { ok: boolean; message: string }
+}
