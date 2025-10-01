@@ -35,7 +35,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className={inter.variable}>
+    <html 
+      lang="fr" 
+      className={inter.variable}
+      data-sidebar-size="lg"
+      data-bs-theme="light"
+      data-layout-width="fluid"
+      data-layout-position="fixed"
+      data-layout-style="default"
+      data-topbar="light"
+      suppressHydrationWarning={true}
+    >
       <head>
         <link rel="stylesheet" href="/css/icofont.min.css" />
         <link rel="stylesheet" href="/css/owl.carousel.min.css" />
@@ -57,7 +67,10 @@ export default function RootLayout({
           <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" />
           <link href="/assets/css/custom.min.css" rel="stylesheet" type="text/css" />
       </head>
-      <body className="font-sans antialiased">
+      <body 
+        className="font-sans antialiased"
+        suppressHydrationWarning={true}
+      >
         <div className="page_wrapper">
           <div id="preloader"></div>
           {/* Header du site gere dans app/(site)/layout.tsx pour eviter les doublons */}

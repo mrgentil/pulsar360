@@ -1,4 +1,29 @@
+"use client"
+import { useState, useEffect } from 'react'
+import { getMe } from '@/lib/auth'
+
 export default function DashboardPage() {
+  const [user, setUser] = useState<any>(null)
+
+  useEffect(() => {
+    async function fetchUser() {
+      try {
+        const response = await getMe()
+        setUser(response.user)
+      } catch (error) {
+        console.error('Erreur lors de la récupération de l\'utilisateur:', error)
+      }
+    }
+    fetchUser()
+  }, [])
+
+  const getGreeting = () => {
+    const hour = new Date().getHours()
+    if (hour < 12) return 'Bonjour'
+    if (hour < 18) return 'Bon après-midi'
+    return 'Bonsoir'
+  }
+
   return (
       <div className="main-content">
           <div className="page-content">
@@ -10,9 +35,11 @@ export default function DashboardPage() {
                                   <div className="col-12">
                                       <div className="d-flex align-items-lg-center flex-lg-row flex-column">
                                           <div className="flex-grow-1">
-                                              <h4 className="fs-16 mb-1">Good Morning, Anna!</h4>
+                                              <h4 className="fs-16 mb-1">
+                                                {getGreeting()}, {user?.name || user?.email || 'Utilisateur'} !
+                                              </h4>
                                               <p className="text-muted mb-0">
-                                                  Here's what's happening with your store today.
+                                                  Voici ce qui se passe avec votre plateforme Pulsar360 aujourd'hui.
                                               </p>
                                           </div>
                                           <div className="mt-3 mt-lg-0">

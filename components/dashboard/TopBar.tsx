@@ -1,4 +1,33 @@
+"use client"
+import { useState, useEffect } from 'react'
+import { getMe, logout } from '@/lib/auth'
+import { useRouter } from 'next/navigation'
+
 export default function TopBar() {
+    const [user, setUser] = useState<any>(null)
+    const [loading, setLoading] = useState(true)
+    const router = useRouter()
+
+    useEffect(() => {
+        async function fetchUser() {
+            try {
+                const response = await getMe()
+                setUser(response.user)
+            } catch (error) {
+                console.error('Erreur lors de la récupération de l\'utilisateur:', error)
+                router.push('/login')
+            } finally {
+                setLoading(false)
+            }
+        }
+        fetchUser()
+    }, [router])
+
+    const handleLogout = () => {
+        logout()
+        router.push('/login')
+    }
+
     return (
         <>
 
@@ -1177,64 +1206,61 @@ export default function TopBar() {
                                     aria-expanded="false"
                                 >
             <span className="d-flex align-items-center">
-              <img
-                  className="rounded-circle header-profile-user"
-                  src="assets/images/users/avatar-1.jpg"
-                  alt="Header Avatar"
-              />
+              {user?.avatarUrl ? (
+                <img
+                    className="rounded-circle header-profile-user"
+                    src={user.avatarUrl}
+                    alt="Header Avatar"
+                />
+              ) : (
+                <div className="rounded-circle header-profile-user bg-primary d-flex align-items-center justify-content-center text-white" style={{width: '32px', height: '32px'}}>
+                  {user?.name?.charAt(0)?.toUpperCase() || user?.email?.charAt(0)?.toUpperCase() || 'U'}
+                </div>
+              )}
               <span className="text-start ms-xl-2">
                 <span className="d-none d-xl-inline-block ms-1 fw-medium user-name-text">
-                  Anna Adame
+                  {loading ? 'Chargement...' : (user?.name || user?.email || 'Utilisateur')}
                 </span>
                 <span className="d-none d-xl-block ms-1 fs-12 user-name-sub-text">
-                  Founder
+                  {user?.role || 'Membre'}
                 </span>
               </span>
             </span>
                                 </button>
                                 <div className="dropdown-menu dropdown-menu-end">
                                     {/* item*/}
-                                    <h6 className="dropdown-header">Welcome Anna!</h6>
-                                    <a className="dropdown-item" href="pages-profile.html">
+                                    <h6 className="dropdown-header">
+                                      Bienvenue {user?.name || user?.email || 'Utilisateur'} !
+                                    </h6>
+                                    <div className="dropdown-item-text">
+                                      <small className="text-muted">
+                                        {user?.email} • {user?.role}
+                                      </small>
+                                    </div>
+                                    <div className="dropdown-divider" />
+                                    <a className="dropdown-item" href="/dashboard/settings">
                                         <i className="mdi mdi-account-circle text-muted fs-16 align-middle me-1" />{" "}
-                                        <span className="align-middle">Profile</span>
+                                        <span className="align-middle">Mon Profil</span>
                                     </a>
-                                    <a className="dropdown-item" href="apps-chat.html">
-                                        <i className="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1" />{" "}
-                                        <span className="align-middle">Messages</span>
+                                    <a className="dropdown-item" href="/dashboard/settings">
+                                        <i className="mdi mdi-cog-outline text-muted fs-16 align-middle me-1" />{" "}
+                                        <span className="align-middle">Paramètres</span>
                                     </a>
-                                    <a className="dropdown-item" href="apps-tasks-kanban.html">
-                                        <i className="mdi mdi-calendar-check-outline text-muted fs-16 align-middle me-1" />{" "}
-                                        <span className="align-middle">Taskboard</span>
-                                    </a>
-                                    <a className="dropdown-item" href="pages-faqs.html">
+                                    <a className="dropdown-item" href="/dashboard/help">
                                         <i className="mdi mdi-lifebuoy text-muted fs-16 align-middle me-1" />{" "}
-                                        <span className="align-middle">Help</span>
+                                        <span className="align-middle">Aide</span>
                                     </a>
                                     <div className="dropdown-divider" />
-                                    <a className="dropdown-item" href="pages-profile.html">
-                                        <i className="mdi mdi-wallet text-muted fs-16 align-middle me-1" />{" "}
+                                    <button 
+                                        className="dropdown-item text-danger" 
+                                        onClick={handleLogout}
+                                        style={{ border: 'none', background: 'none', width: '100%', textAlign: 'left' }}
+                                    >
+                                        <i className="mdi mdi-logout text-danger fs-16 align-middle me-1" />{" "}
                                         <span className="align-middle">
-                Balance : <b>$5971.67</b>
-              </span>
-                                    </a>
-                                    <a className="dropdown-item" href="pages-profile-settings.html">
-              <span className="badge bg-success-subtle text-success mt-1 float-end">
-                New
-              </span>
-                                        <i className="mdi mdi-cog-outline text-muted fs-16 align-middle me-1" />{" "}
-                                        <span className="align-middle">Settings</span>
-                                    </a>
-                                    <a className="dropdown-item" href="auth-lockscreen-basic.html">
-                                        <i className="mdi mdi-lock text-muted fs-16 align-middle me-1" />{" "}
-                                        <span className="align-middle">Lock screen</span>
-                                    </a>
-                                    <a className="dropdown-item" href="auth-logout-basic.html">
-                                        <i className="mdi mdi-logout text-muted fs-16 align-middle me-1" />{" "}
-                                        <span className="align-middle" data-key="t-logout">
-                Logout
-              </span>
-                                    </a>
+                                          Déconnexion
+                                        </span>
+                                    </button>
                                 </div>
                             </div>
                         </div>

@@ -70,6 +70,7 @@ model Brand {
   id             String   @id @default(cuid())
   slug           String?   @unique
   name           String
+  description    String?
   logoUrl        String?
   coverUrl       String?
   primaryColor   String?

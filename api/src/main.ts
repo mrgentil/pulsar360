@@ -37,7 +37,7 @@ async function bootstrap() {
     Logger.log(`CORS origin: ${allowedOrigins.join(', ')}`, 'Bootstrap');
   }
 
-  const port = Number(process.env.PORT ?? 3000);
+  const port = Number(process.env.PORT ?? 3001);
   await app.listen(port);
   const url = await app.getUrl();
   Logger.log(`API en écoute: ${url} (prefix: /api)`, 'Bootstrap');

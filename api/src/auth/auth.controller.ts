@@ -54,7 +54,7 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @Get('me')
   async me(@Req() req: any) {
-    const userId: string | undefined = req.user?.userId;
+    const userId: string | undefined = req.user?.id;
     if (!userId) return null;
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
@@ -110,14 +110,14 @@ export class AuthController {
   @UseGuards(JwtRolesGuard)
   @Roles('OWNER', 'ADMIN')
   async getAllUsers(@Req() req: any) {
-    return this.auth.getAllUsers(req.user.userId);
+    return this.auth.getAllUsers(req.user.id);
   }
 
   @Put('users/:id/role')
   @UseGuards(JwtRolesGuard)
   @Roles('OWNER')
   async updateUserRole(@Req() req: any, @Param('id') userId: string, @Body('role') role: string) {
-    return this.auth.updateUserRole(req.user.userId, userId, role);
+    return this.auth.updateUserRole(req.user.id, userId, role);
   }
 
   @Post('logout')
@@ -127,16 +127,16 @@ export class AuthController {
     if (!jti) {
       throw new BadRequestException('Token invalide');
     }
-    return this.auth.logout(req.user.userId, jti);
+    return this.auth.logout(req.user.id, jti);
   }
 
   @Post('refresh')
   @UseGuards(JwtAuthGuard)
   async refresh(@Req() req: any) {
-    const { jti, userId, email } = req.user;
-    if (!jti || !userId || !email) {
+    const { jti, id, email } = req.user;
+    if (!jti || !id || !email) {
       throw new BadRequestException('Token invalide');
     }
-    return this.auth.refreshToken(jti, userId, email);
+    return this.auth.refreshToken(jti, id, email);
   }
 }
