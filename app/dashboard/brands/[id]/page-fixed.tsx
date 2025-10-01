@@ -145,161 +145,84 @@ export default function BrandDetailPage() {
       <div className="page-content">
         <div className="container-fluid">
           {/* Header avec image de couverture */}
-          <div className="profile-foreground position-relative" style={{ marginLeft: '-1.5rem', marginRight: '-1.5rem', marginTop: '-1.5rem' }}>
+          <div className="profile-foreground position-relative mx-n4 mt-n4">
             <div className="profile-wid-bg" style={{
               background: brand.coverUrl 
                 ? `url(${brand.coverUrl}) center/cover` 
                 : `linear-gradient(135deg, ${brand.primaryColor || '#6366f1'}, ${brand.secondaryColor || '#8b5cf6'})`,
-              height: '250px',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              borderRadius: '0.75rem 0.75rem 0 0',
-              position: 'relative'
+              height: '200px'
             }}>
-              {/* Overlay sombre pour lisibilité */}
-              <div style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                background: 'linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.2))',
-                borderRadius: '0.75rem 0.75rem 0 0'
-              }}></div>
-              
-              <div className="overlay-content h-100" style={{ position: 'relative', zIndex: 1 }}>
-                <div className="card-body p-4 h-100 d-flex flex-column justify-content-between">
-                  {/* Top Section - Navigation */}
-                  <div className="d-flex align-items-center justify-content-between">
-                    <Button variant="ghost" size="sm" asChild className="text-white hover:bg-white/20">
-                      <Link href="/dashboard/brands">
-                        <ArrowLeft className="h-4 w-4 me-2" />
-                        Retour
-                      </Link>
-                    </Button>
-                    
-                    <div className="d-flex align-items-center gap-3">
-                      {/* Logo miniature en haut à droite */}
-                      <div style={{ 
-                        height: '2.5rem', 
-                        width: '2.5rem', 
-                        border: '2px solid rgba(255,255,255,0.3)', 
-                        borderRadius: '50%',
-                        overflow: 'hidden',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        background: 'rgba(255,255,255,0.1)',
-                        backdropFilter: 'blur(10px)'
-                      }}>
-                        {brand.logoUrl ? (
-                          <img 
-                            src={brand.logoUrl} 
-                            alt={brand.name}
-                            style={{
-                              width: '100%',
-                              height: '100%',
-                              objectFit: 'cover',
-                              borderRadius: '50%'
-                            }}
-                          />
-                        ) : (
-                          <span style={{
-                            fontSize: '0.875rem',
-                            fontWeight: 'bold',
-                            color: 'white'
-                          }}>
-                            {brand.name.charAt(0).toUpperCase()}
-                          </span>
-                        )}
-                      </div>
-                      
-                      {canEdit && (
-                        <Button onClick={() => setIsEditModalOpen(true)} size="sm" className="btn-light">
-                          <Edit className="h-4 w-4 me-1" />
-                          Modifier
-                        </Button>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Bottom Section - Brand Info */}
-                  <div className="d-flex align-items-end">
-                    <div className="me-4">
-                      <div style={{ 
-                        height: '6rem', 
-                        width: '6rem', 
-                        border: '4px solid white', 
-                        borderRadius: '50%',
-                        boxShadow: '0 10px 25px rgba(0,0,0,0.15)',
-                        overflow: 'hidden',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        background: brand.primaryColor 
-                          ? `linear-gradient(135deg, ${brand.primaryColor}, ${brand.secondaryColor || brand.primaryColor})` 
-                          : 'linear-gradient(135deg, #6366f1, #8b5cf6)'
-                      }}>
-                        {brand.logoUrl ? (
-                          <img 
-                            src={brand.logoUrl} 
-                            alt={brand.name}
-                            style={{
-                              width: '100%',
-                              height: '100%',
-                              objectFit: 'cover',
-                              borderRadius: '50%'
-                            }}
-                            onError={(e) => {
-                              // Si l'image ne charge pas, on affiche la lettre
-                              e.currentTarget.style.display = 'none';
-                              e.currentTarget.nextElementSibling.style.display = 'flex';
-                            }}
-                          />
-                        ) : null}
-                        <div style={{
-                          display: brand.logoUrl ? 'none' : 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          width: '100%',
-                          height: '100%',
-                          fontSize: '1.5rem',
-                          fontWeight: 'bold',
-                          color: 'white'
-                        }}>
-                          {brand.name.charAt(0).toUpperCase()}
+              <div className="overlay-content">
+                <div className="card-body p-0">
+                  <div className="row">
+                    <div className="col">
+                      <div className="p-3">
+                        <div className="d-flex align-items-end">
+                          <div className="flex-grow-1">
+                            <div>
+                              <div className="d-flex align-items-center mb-2">
+                                <Button variant="ghost" size="sm" asChild className="text-white hover:bg-white/20 me-3">
+                                  <Link href="/dashboard/brands">
+                                    <ArrowLeft className="h-4 w-4 me-2" />
+                                    Retour
+                                  </Link>
+                                </Button>
+                              </div>
+                              <h5 className="fs-16 text-white mb-1">{brand.name}</h5>
+                              <p className="text-white-75 mb-0">@{brand.slug}</p>
+                            </div>
+                          </div>
+                          <div className="flex-shrink-0">
+                            <div className="d-flex gap-2">
+                              {canEdit && (
+                                <Button onClick={() => setIsEditModalOpen(true)} size="sm" className="btn-light">
+                                  <Edit className="h-4 w-4 me-1" />
+                                  Modifier
+                                </Button>
+                              )}
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                    
-                    <div className="flex-grow-1">
-                      <h1 style={{ color: 'white', marginBottom: '0.5rem', fontSize: '1.5rem', fontWeight: 'bold' }}>
-                        {brand.name}
-                      </h1>
-                      <p style={{ color: 'rgba(255, 255, 255, 0.75)', marginBottom: '0.5rem', fontSize: '0.875rem' }}>
-                        @{brand.slug}
-                      </p>
-                      
-                      <div className="d-flex align-items-center gap-2 mb-2">
-                        {getRoleIcon(userRole)}
-                        <Badge variant="secondary" style={{ background: 'rgba(255, 255, 255, 0.9)', color: '#374151', fontSize: '0.75rem' }}>
-                          {getRoleLabel(userRole)}
-                        </Badge>
-                      </div>
-                      
-                      {brand.description && (
-                        <p style={{ 
-                          color: 'rgba(255, 255, 255, 0.75)', 
-                          marginBottom: '0', 
-                          fontSize: '0.875rem', 
-                          opacity: '0.9',
-                          maxWidth: '500px' 
-                        }}>
-                          {brand.description}
-                        </p>
-                      )}
-                    </div>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Profile Info */}
+          <div className="pt-4 mb-4 mb-lg-3 pb-lg-4">
+            <div className="row g-4">
+              <div className="col-auto">
+                <div className="avatar-lg">
+                  <Avatar className="h-20 w-20 border-4 border-white shadow-lg" style={{ marginTop: '-40px' }}>
+                    <AvatarImage src={brand.logoUrl} alt={brand.name} />
+                    <AvatarFallback 
+                      className="text-xl font-bold text-white"
+                      style={{ 
+                        background: brand.primaryColor 
+                          ? `linear-gradient(135deg, ${brand.primaryColor}, ${brand.secondaryColor || brand.primaryColor})` 
+                          : 'linear-gradient(135deg, #6366f1, #8b5cf6)' 
+                      }}
+                    >
+                      {brand.name.charAt(0).toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+                </div>
+              </div>
+              <div className="col">
+                <div className="p-2">
+                  <h3 className="text-white mb-1">{brand.name}</h3>
+                  <div className="hstack gap-1 mb-2">
+                    {getRoleIcon(userRole)}
+                    <Badge variant="secondary" className="bg-white/90 text-gray-800">
+                      {getRoleLabel(userRole)}
+                    </Badge>
+                  </div>
+                  {brand.description && (
+                    <p className="text-white-75 mb-0">{brand.description}</p>
+                  )}
                 </div>
               </div>
             </div>

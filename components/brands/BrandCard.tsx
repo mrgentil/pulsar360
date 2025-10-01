@@ -66,128 +66,141 @@ export default function BrandCard({ brand, onEdit, onDelete }: BrandCardProps) {
   const canDelete = userRole === Role.OWNER;
 
   return (
-    <Card className="group hover:shadow-lg transition-all duration-200 border-0 shadow-sm bg-white">
-      <CardHeader className="pb-3">
-        <div className="flex items-start justify-between">
-          <div className="flex items-center space-x-3">
-            <Avatar className="h-12 w-12 border-2 border-gray-100">
-              <AvatarImage src={brand.logoUrl} alt={brand.name} />
-              <AvatarFallback 
-                className="text-lg font-semibold"
-                style={{ backgroundColor: brand.primaryColor || '#f3f4f6' }}
+    <div className="card gallery-card overflow-hidden">
+      {/* Image principale */}
+      <div className="position-relative overflow-hidden" style={{ height: '200px' }}>
+        <img 
+          src={brand.coverUrl || brand.logoUrl || `https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=200&fit=crop&crop=center`}
+          alt={brand.name}
+          className="w-100 h-100 object-cover"
+          style={{ objectFit: 'cover' }}
+        />
+        
+        {/* Overlay avec gradient */}
+        <div className="position-absolute top-0 start-0 w-100 h-100" 
+             style={{ background: 'linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.7) 100%)' }}>
+        </div>
+        
+        {/* Logo en overlay */}
+        <div className="position-absolute top-0 end-0 m-3">
+          <Avatar className="h-10 w-10 border-2 border-white shadow-sm">
+            <AvatarImage src={brand.logoUrl} alt={brand.name} />
+            <AvatarFallback 
+              className="text-sm font-bold text-white"
+              style={{ 
+                background: brand.primaryColor 
+                  ? `linear-gradient(135deg, ${brand.primaryColor}, ${brand.secondaryColor || brand.primaryColor})` 
+                  : 'linear-gradient(135deg, #6366f1, #8b5cf6)' 
+              }}
+            >
+              {brand.name.charAt(0).toUpperCase()}
+            </AvatarFallback>
+          </Avatar>
+        </div>
+        
+        {/* Menu dropdown */}
+        <div className="position-absolute top-0 start-0 m-3">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="text-white hover:bg-white/20 border-0 opacity-0 group-hover:opacity-100 transition-opacity"
               >
-                {brand.name.charAt(0).toUpperCase()}
-              </AvatarFallback>
-            </Avatar>
-            <div>
-              <h3 className="font-semibold text-lg text-gray-900">{brand.name}</h3>
-              <p className="text-sm text-gray-500">@{brand.slug}</p>
-            </div>
-          </div>
-          
-          <div className="flex items-center space-x-2">
-            <Badge variant="outline" className={getRoleColor(userRole)}>
-              {getRoleLabel(userRole)}
-            </Badge>
-            
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="opacity-0 group-hover:opacity-100 transition-opacity">
-                  <MoreHorizontal className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem asChild>
-                  <Link href={`/dashboard/brands/${brand.id}`}>
-                    <Settings className="h-4 w-4 mr-2" />
-                    Gérer
-                  </Link>
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start">
+              <DropdownMenuItem asChild>
+                <Link href={`/dashboard/brands/${brand.id}`}>
+                  <Settings className="h-4 w-4 mr-2" />
+                  Gérer
+                </Link>
+              </DropdownMenuItem>
+              {canEdit && (
+                <DropdownMenuItem onClick={() => onEdit?.(brand)}>
+                  <Edit className="h-4 w-4 mr-2" />
+                  Modifier
                 </DropdownMenuItem>
-                {canEdit && (
-                  <DropdownMenuItem onClick={() => onEdit?.(brand)}>
-                    <Edit className="h-4 w-4 mr-2" />
-                    Modifier
-                  </DropdownMenuItem>
-                )}
-                <DropdownMenuSeparator />
-                {canDelete && (
-                  <DropdownMenuItem 
-                    onClick={() => onDelete?.(brand)}
-                    className="text-red-600 focus:text-red-600"
-                  >
-                    <Trash2 className="h-4 w-4 mr-2" />
-                    Supprimer
-                  </DropdownMenuItem>
-                )}
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
+              )}
+              <DropdownMenuSeparator />
+              {canDelete && (
+                <DropdownMenuItem 
+                  onClick={() => onDelete?.(brand)}
+                  className="text-red-600 focus:text-red-600"
+                >
+                  <Trash2 className="h-4 w-4 mr-2" />
+                  Supprimer
+                </DropdownMenuItem>
+              )}
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
         
-        {brand.description && (
-          <p className="text-sm text-gray-600 mt-2 line-clamp-2">{brand.description}</p>
-        )}
-      </CardHeader>
+        {/* Badge rôle */}
+        <div className="position-absolute bottom-0 start-0 m-3">
+          <Badge variant="secondary" className="bg-white/90 text-gray-800 border-0">
+            {getRoleLabel(userRole)}
+          </Badge>
+        </div>
+      </div>
       
-      <CardContent className="pt-0">
-        <div className="grid grid-cols-4 gap-4 mb-4">
-          <div className="text-center">
-            <div className="flex items-center justify-center w-8 h-8 bg-blue-100 rounded-lg mx-auto mb-1">
-              <Users className="h-4 w-4 text-blue-600" />
-            </div>
-            <p className="text-xs text-gray-500">Membres</p>
-            <p className="text-sm font-semibold">{brand._count?.members || 0}</p>
-          </div>
-          
-          <div className="text-center">
-            <div className="flex items-center justify-center w-8 h-8 bg-green-100 rounded-lg mx-auto mb-1">
-              <MessageSquare className="h-4 w-4 text-green-600" />
-            </div>
-            <p className="text-xs text-gray-500">Canaux</p>
-            <p className="text-sm font-semibold">{brand._count?.channels || 0}</p>
-          </div>
-          
-          <div className="text-center">
-            <div className="flex items-center justify-center w-8 h-8 bg-purple-100 rounded-lg mx-auto mb-1">
-              <BarChart3 className="h-4 w-4 text-purple-600" />
-            </div>
-            <p className="text-xs text-gray-500">Contenus</p>
-            <p className="text-sm font-semibold">{brand._count?.contents || 0}</p>
-          </div>
-          
-          <div className="text-center">
-            <div className="flex items-center justify-center w-8 h-8 bg-orange-100 rounded-lg mx-auto mb-1">
-              <ImageIcon className="h-4 w-4 text-orange-600" />
-            </div>
-            <p className="text-xs text-gray-500">Médias</p>
-            <p className="text-sm font-semibold">{brand._count?.media || 0}</p>
+      {/* Contenu de la carte */}
+      <div className="card-body p-3">
+        <div className="d-flex align-items-start justify-content-between mb-2">
+          <div className="flex-grow-1">
+            <h6 className="card-title mb-1 fw-semibold text-dark">{brand.name}</h6>
+            <p className="text-muted mb-0 small">@{brand.slug}</p>
           </div>
         </div>
         
-        <div className="flex items-center justify-between">
-          <div className="flex -space-x-2">
-            {brand.members?.slice(0, 3).map((member) => (
-              <Avatar key={member.id} className="h-6 w-6 border-2 border-white">
-                <AvatarImage src={member.user?.avatarUrl} alt={member.user?.name || 'Utilisateur'} />
-                <AvatarFallback className="text-xs">
-                  {member.user?.name?.charAt(0).toUpperCase() || member.user?.email?.charAt(0).toUpperCase() || 'U'}
-                </AvatarFallback>
-              </Avatar>
-            )) || []}
-            {(brand._count?.members || 0) > 3 && (
-              <div className="h-6 w-6 bg-gray-100 border-2 border-white rounded-full flex items-center justify-center">
-                <span className="text-xs text-gray-600">+{(brand._count?.members || 0) - 3}</span>
-              </div>
-            )}
+        {/* Statistiques en ligne */}
+        <div className="d-flex align-items-center justify-content-between text-muted small mb-3">
+          <div className="d-flex align-items-center">
+            <Users className="h-4 w-4 me-1" />
+            <span>{brand._count?.members || 0}</span>
+          </div>
+          <div className="d-flex align-items-center">
+            <MessageSquare className="h-4 w-4 me-1" />
+            <span>{brand._count?.channels || 0}</span>
+          </div>
+          <div className="d-flex align-items-center">
+            <BarChart3 className="h-4 w-4 me-1" />
+            <span>{brand._count?.contents || 0}</span>
+          </div>
+          <div className="d-flex align-items-center">
+            <ImageIcon className="h-4 w-4 me-1" />
+            <span>{brand._count?.media || 0}</span>
+          </div>
+        </div>
+        
+        {/* Membres et bouton */}
+        <div className="d-flex align-items-center justify-content-between">
+          <div className="d-flex align-items-center">
+            <div className="d-flex" style={{ marginLeft: '-4px' }}>
+              {brand.members?.slice(0, 3).map((member) => (
+                <Avatar key={member.id} className="h-6 w-6 border-2 border-white" style={{ marginLeft: '-4px' }}>
+                  <AvatarImage src={member.user?.avatarUrl} alt={member.user?.name || 'Utilisateur'} />
+                  <AvatarFallback className="text-xs bg-gray-200">
+                    {member.user?.name?.charAt(0).toUpperCase() || member.user?.email?.charAt(0).toUpperCase() || 'U'}
+                  </AvatarFallback>
+                </Avatar>
+              )) || []}
+              {(brand._count?.members || 0) > 3 && (
+                <div className="h-6 w-6 bg-gray-100 border-2 border-white rounded-circle d-flex align-items-center justify-content-center" style={{ marginLeft: '-4px' }}>
+                  <span className="text-xs text-gray-600">+{(brand._count?.members || 0) - 3}</span>
+                </div>
+              )}
+            </div>
           </div>
           
-          <Button asChild size="sm" variant="outline">
+          <Button asChild size="sm" className="btn-sm btn-primary">
             <Link href={`/dashboard/brands/${brand.id}`}>
               Ouvrir
             </Link>
           </Button>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

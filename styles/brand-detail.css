@@ -1,0 +1,180 @@
+/* Brand Detail Page - Style Velzon */
+
+.profile-foreground {
+  position: relative;
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+  margin-top: -1.5rem;
+}
+
+.profile-wid-bg {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  border-radius: 0.75rem 0.75rem 0 0;
+}
+
+.profile-wid-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.2));
+  border-radius: 0.75rem 0.75rem 0 0;
+}
+
+/* Typography améliorée */
+.fs-24 {
+  font-size: 1.5rem !important;
+}
+
+.fs-14 {
+  font-size: 0.875rem !important;
+}
+
+.fs-12 {
+  font-size: 0.75rem !important;
+}
+
+.text-white-75 {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+/* Avatar amélioré */
+.h-24 {
+  height: 6rem !important;
+}
+
+.w-24 {
+  width: 6rem !important;
+}
+
+.overlay-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Cards Animation */
+.card-animate {
+  transition: all 0.3s ease;
+}
+
+.card-animate:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+/* Tabs Custom */
+.nav-tabs-custom {
+  border-bottom: 1px solid #e9ecef;
+}
+
+.nav-tabs-custom .nav-link {
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: #6c757d;
+  font-weight: 500;
+  padding: 1rem 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.nav-tabs-custom .nav-link:hover {
+  color: #495057;
+  border-bottom-color: #dee2e6;
+}
+
+.nav-tabs-custom .nav-link.active {
+  color: #405189;
+  border-bottom-color: #405189;
+  background: transparent;
+}
+
+/* Avatar Styles */
+.avatar-lg {
+  position: relative;
+}
+
+/* Badge Soft Variants */
+.badge-soft-primary {
+  color: #405189;
+  background-color: rgba(64, 81, 137, 0.1);
+}
+
+.badge-soft-success {
+  color: #0ab39c;
+  background-color: rgba(10, 179, 156, 0.1);
+}
+
+.badge-soft-info {
+  color: #299cdb;
+  background-color: rgba(41, 156, 219, 0.1);
+}
+
+.badge-soft-warning {
+  color: #f7b84b;
+  background-color: rgba(247, 184, 75, 0.1);
+}
+
+.badge-soft-danger {
+  color: #f06548;
+  background-color: rgba(240, 101, 72, 0.1);
+}
+
+/* Background Subtle */
+.bg-primary-subtle {
+  background-color: rgba(64, 81, 137, 0.1) !important;
+}
+
+.bg-success-subtle {
+  background-color: rgba(10, 179, 156, 0.1) !important;
+}
+
+.bg-info-subtle {
+  background-color: rgba(41, 156, 219, 0.1) !important;
+}
+
+.bg-warning-subtle {
+  background-color: rgba(247, 184, 75, 0.1) !important;
+}
+
+/* Text Colors */
+.text-primary {
+  color: #405189 !important;
+}
+
+.text-success {
+  color: #0ab39c !important;
+}
+
+.text-info {
+  color: #299cdb !important;
+}
+
+.text-warning {
+  color: #f7b84b !important;
+}
+
+/* Button Labels */
+.btn-label {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .profile-foreground {
+    margin-left: -1rem;
+    margin-right: -1rem;
+    margin-top: -1rem;
+  }
+  
+  .nav-tabs-custom .nav-link {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+  }
+}

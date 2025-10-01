@@ -28,9 +28,13 @@ import {
   Loader2
 } from 'lucide-react';
 
+// Import des styles gallery
+import '../../../styles/gallery.css';
+
 export default function BrandsPage() {
   const [brands, setBrands] = useState<Brand[]>([]);
   const [filteredBrands, setFilteredBrands] = useState<Brand[]>([]);
+  const [displayedBrands, setDisplayedBrands] = useState<Brand[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -38,24 +42,36 @@ export default function BrandsPage() {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [selectedBrand, setSelectedBrand] = useState<Brand | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const ITEMS_PER_PAGE = 6;
 
   useEffect(() => {
     loadBrands();
   }, []);
-
   useEffect(() => {
     console.log('Modal state changed:', isCreateModalOpen);
   }, [isCreateModalOpen]);
 
   useEffect(() => {
-    // Filter brands based on search query
-    const filtered = brands.filter(brand =>
-      brand.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      brand.slug.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      brand.description?.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    setFilteredBrands(filtered);
-  }, [brands, searchQuery]);
+    if (searchQuery.trim() === '') {
+      setFilteredBrands(brands);
+    } else {
+      const filtered = brands.filter(brand =>
+        brand.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        brand.slug.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        brand.description?.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredBrands(filtered);
+    }
+    setCurrentPage(1); // Reset pagination when filtering
+  }, [searchQuery, brands]);
+
+  // Effect pour gérer l'affichage paginé (chargement infini)
+  useEffect(() => {
+    const endIndex = currentPage * ITEMS_PER_PAGE;
+    setDisplayedBrands(filteredBrands.slice(0, endIndex));
+  }, [filteredBrands, currentPage]);
 
   const loadBrands = async () => {
     try {
@@ -125,6 +141,16 @@ export default function BrandsPage() {
     setIsDeleteDialogOpen(true);
   };
 
+  const loadMore = async () => {
+    setIsLoadingMore(true);
+    // Simuler un délai de chargement
+    await new Promise(resolve => setTimeout(resolve, 500));
+    setCurrentPage(prev => prev + 1);
+    setIsLoadingMore(false);
+  };
+
+  const hasMoreItems = displayedBrands.length < filteredBrands.length;
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
@@ -165,24 +191,46 @@ export default function BrandsPage() {
               </div>
             </div>
           </div>
-          {/* Search and Filters */}
+          {/* Filtres par onglets */}
           <div className="row mb-4">
             <div className="col-12">
-              <div className="d-flex align-items-center gap-3">
-                <div className="position-relative flex-grow-1" style={{maxWidth: '400px'}}>
-                  <Search className="position-absolute top-50 start-0 translate-middle-y ms-3 h-4 w-4 text-muted" />
-                  <input
-                    type="text"
-                    className="form-control ps-5"
-                    placeholder="Rechercher une marque..."
-                    value={searchQuery}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
-                  />
+              <div className="d-flex align-items-center justify-content-between mb-3">
+                <ul className="nav nav-pills gallery-nav" role="tablist">
+                  <li className="nav-item" role="presentation">
+                    <button className="nav-link active" type="button">
+                      Toutes
+                    </button>
+                  </li>
+                  <li className="nav-item" role="presentation">
+                    <button className="nav-link" type="button">
+                      Mes marques
+                    </button>
+                  </li>
+                  <li className="nav-item" role="presentation">
+                    <button className="nav-link" type="button">
+                      Partagées
+                    </button>
+                  </li>
+                  <li className="nav-item" role="presentation">
+                    <button className="nav-link" type="button">
+                      Archivées
+                    </button>
+                  </li>
+                </ul>
+                
+                <div className="d-flex align-items-center gap-2">
+                  <div className="position-relative">
+                    <Search className="position-absolute top-50 start-0 translate-middle-y ms-3 h-4 w-4 text-muted" />
+                    <input
+                      type="text"
+                      className="form-control ps-5"
+                      placeholder="Rechercher..."
+                      value={searchQuery}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
+                      style={{ width: '250px' }}
+                    />
+                  </div>
                 </div>
-                <button className="btn btn-outline-secondary">
-                  <Filter className="h-4 w-4 me-2" />
-                  Filtres
-                </button>
               </div>
             </div>
           </div>
@@ -190,7 +238,7 @@ export default function BrandsPage() {
           {/* Brands Grid */}
           <div className="row">
             <div className="col-12">
-              {filteredBrands.length === 0 ? (
+              {displayedBrands.length === 0 && filteredBrands.length === 0 ? (
                 <div className="text-center py-5">
                   <Building2 className="h-16 w-16 text-muted mx-auto mb-4" />
                   <h3 className="fs-18 fw-semibold text-dark mb-2">
@@ -213,17 +261,42 @@ export default function BrandsPage() {
                   )}
                 </div>
               ) : (
-                <div className="row g-4">
-                  {filteredBrands.map((brand) => (
-                    <div key={brand.id} className="col-xl-4 col-lg-6 col-md-6">
-                      <BrandCard
-                        brand={brand}
-                        onEdit={openEditModal}
-                        onDelete={openDeleteDialog}
-                      />
+                <>
+                  <div className="row g-4">
+                    {displayedBrands.map((brand) => (
+                      <div key={brand.id} className="col-xl-4 col-lg-6 col-md-6">
+                        <BrandCard
+                          brand={brand}
+                          onEdit={openEditModal}
+                          onDelete={openDeleteDialog}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  
+                  {/* Load More Button */}
+                  {hasMoreItems && (
+                    <div className="text-center mt-4">
+                      <button 
+                        onClick={loadMore}
+                        disabled={isLoadingMore}
+                        className="btn btn-link text-primary fw-medium"
+                      >
+                        {isLoadingMore ? (
+                          <>
+                            <Loader2 className="h-4 w-4 me-2 animate-spin" />
+                            Chargement...
+                          </>
+                        ) : (
+                          <>
+                            <Plus className="h-4 w-4 me-2" />
+                            Charger plus ({filteredBrands.length - displayedBrands.length} restantes)
+                          </>
+                        )}
+                      </button>
                     </div>
-                  ))}
-                </div>
+                  )}
+                </>
               )}
 
       {/* Create Brand Modal */}
